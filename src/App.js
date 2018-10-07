@@ -23,7 +23,7 @@ class App extends Component {
       },
       {
         eventName: " End of ValiIT! theory course",
-        eventDate: "September 24, 2018 17.00",
+        eventDate: "September 24, 2018 17:00",
         imageUrl:
           "https://cdn-images-1.medium.com/max/2000/1*9Cqyu3Lx4BKHUZShGe5cuQ.jpeg",
         eventId: 2

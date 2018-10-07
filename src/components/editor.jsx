@@ -73,16 +73,16 @@ class Editor extends Component {
             </div>
             <button
               onClick={this.props.onFormSubmit}
-              className="btn btn-warning "
+              className="btn btn-warning m-4"
             >
               Add new event
             </button>
-            <button
+            {/* <button
               onClick={this.props.onClearForm}
               className="btn btn-secondary m-2"
             >
               Clear form
-            </button>
+            </button> */}
           </form>
 
           <div>

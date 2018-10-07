@@ -67,13 +67,12 @@ class AddEvent extends Component {
 
   handleClearForm = e => {
     e.preventDefault();
-    this.setState({
-      newEvent: {
-        eventName: "",
-        eventDate: "",
-        imageUrl: ""
-      }
-    });
+    const newEvent = {
+      eventName: "",
+      eventDate: "",
+      imageUrl: ""
+    };
+    this.setState({ newEvent });
   };
 
   render() {
@@ -83,7 +82,7 @@ class AddEvent extends Component {
           <Editor
             onToggleEditor={this.handleToggleEditor}
             onFormSubmit={this.handleFormSubmit}
-            onClearForm={this.handleClearForm}
+            // onClearForm={this.handleClearForm}
             onEventName={this.handleEventName}
             onEventDate={this.handleEventDate}
             onImageUrl={this.handleImageUrl}

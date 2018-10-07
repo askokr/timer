@@ -22,24 +22,24 @@ class App extends Component {
         eventId: 1
       },
       {
-        eventName: "Back in Tartu ",
-        eventDate: "October 5, 2018 20:30",
+        eventName: " End of ValiIT! theory course",
+        eventDate: "September 24, 2018 17.00",
         imageUrl:
-          "https://www.geenivaramu.ee/sites/default/files/field/image/tartu.jpeg",
+          "https://cdn-images-1.medium.com/max/2000/1*9Cqyu3Lx4BKHUZShGe5cuQ.jpeg",
         eventId: 2
       },
       {
-        eventName: "Christmas",
+        eventName: "Christmas Eve",
         eventDate: "December 24, 2018",
         imageUrl:
           "http://upperallenfire.com/wp/wp-content/uploads/2013/12/Christmas-Tree-and-Fireplace.jpg",
         eventId: 3
       },
       {
-        eventName: "Iaido practice",
-        eventDate: "October 3, 2018, 19:45",
+        eventName: "St John's Eve",
+        eventDate: "June 23, 2019",
         imageUrl:
-          "https://www.usadojo.com/wp-content/uploads/2010/09/Iaido-600x300.jpg",
+          "http://www.kultuurivara.ee/wp-content/uploads/2017/06/LigoMidsummerday-2.jpg",
         eventId: 4
       }
     ]

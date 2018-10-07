@@ -94,7 +94,7 @@ class App extends Component {
 
   handleSortAscending = () => {
     const events = [...this.state.events];
-    events.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+    events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
     this.setState({ events });
     const sortDirection = "ascending";
     this.setState({ sortDirection });
@@ -102,7 +102,7 @@ class App extends Component {
 
   handleSortDescending = () => {
     const events = [...this.state.events];
-    events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+    events.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
     this.setState({ events });
     const sortDirection = "descending";
     this.setState({ sortDirection });

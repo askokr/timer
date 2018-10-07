@@ -35,7 +35,7 @@ class TimerDisplay extends Component {
             <div className="p-2 flex-shrink-1">
               <div className="text-container-button">
                 <button
-                  className="btn btn-outline-danger btn-lg"
+                  className="btn btn-danger btn-lg"
                   onClick={() => onDelete(eventId)}
                 >
                   <span role="img">🗑</span>

@@ -49,6 +49,7 @@ class Editor extends Component {
                   </div>
                   <DateTime
                     value={eventDate}
+                    inputProps={{ readOnly: true }}
                     onChange={this.props.onEventDate}
                   />
                 </div>
@@ -77,12 +78,6 @@ class Editor extends Component {
             >
               Add new event
             </button>
-            {/* <button
-              onClick={this.props.onClearForm}
-              className="btn btn-secondary m-2"
-            >
-              Clear form
-            </button> */}
           </form>
 
           <div>

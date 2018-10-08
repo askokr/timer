@@ -26,7 +26,8 @@ class TimerDisplay extends Component {
             <div className="p-2 w-100">
               <h2>{eventName === "" ? "Unnamed event" : eventName}</h2>
               <h4>
-                {eventDate === ""
+                {Object.prototype.toString.call(eventDate) ===
+                  "[object Date]" || eventDate === ""
                   ? "On an undefined date"
                   : datetimeStringFunction(eventDate)}
               </h4>

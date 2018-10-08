@@ -93,9 +93,10 @@
 
 .zoom:hover .background-image {
   box-shadow: 5px 5px 5px 5px transparent;
-  transform: scale(1.03);
+  /* transform: scale(1.03); */
   opacity: 0.5;
-  border: 1px solid #888888;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px 2px black;
 }
 
 .zoom:hover h2,
@@ -142,8 +143,12 @@
   background-color: rgba(236, 132, 132, 0.5);
 }
 
-.passedEvent:hover {
+/* .passedEvent:hover {
   transform: scale(1.03);
+} */
+
+.passedEvent h3 {
+  font-weight: bolder;
 }
 
 .passedEvent h2,
@@ -163,7 +168,7 @@
 }
 .shadowy:hover {
   box-shadow: 2px 2px 2px 2px #6b6b6b;
-  transform: scale(1.03);
+  /* transform: scale(1.03); */
 }
 
 .shadowy h2 {
@@ -176,4 +181,11 @@
     rgba(229, 221, 218, 0.6) 60%,
     rgba(229, 221, 218, 0) 100%
   );
+}
+
+.bottom-filler {
+  height: 250px;
+  position: relative;
+  top: -20px;
+  position: relative;
 }

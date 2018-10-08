@@ -2,11 +2,29 @@ import React from "react";
 import TimerDisplay from "./timerdisplay";
 import AddEvent from "./addevent";
 
-const TimerList = ({ events, time, onDelete, onAddEvent }) => {
-  const eventsToRender = events.filter(c => c.eventId !== 0);
+const TimerList = ({
+  events,
+  time,
+  onDelete,
+  onToggleEditor,
+  areYouAddingAnEvent,
+  onFormSubmit,
+  onEventName,
+  onEventDate,
+  onImageUrl
+}) => {
+  const eventsToRender = events;
   return (
     <React.Fragment>
-      <AddEvent time={time} onAddEvent={onAddEvent} />
+      <AddEvent
+        time={time}
+        onToggleEditor={onToggleEditor}
+        areYouAddingAnEvent={areYouAddingAnEvent}
+        onFormSubmit={onFormSubmit}
+        onEventName={onEventName}
+        onEventDate={onEventDate}
+        onImageUrl={onImageUrl}
+      />
       {eventsToRender.map(event => (
         <TimerDisplay
           event={event}
@@ -15,6 +33,7 @@ const TimerList = ({ events, time, onDelete, onAddEvent }) => {
           key={event.eventId}
         />
       ))}
+      <div className="container text-center m-4 bottom-filler" />
     </React.Fragment>
   );
 };

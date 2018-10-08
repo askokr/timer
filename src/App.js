@@ -8,6 +8,7 @@ class App extends Component {
   state = {
     time: new Date(),
     sortDirection: "byKey",
+    whatEvetsToDisplay: "all",
     areYouAddingAnEvent: false,
     events: [
       {
@@ -203,6 +204,45 @@ class App extends Component {
     }));
   };
 
+  handleDisplayAll = () => {
+    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
+    whatEvetsToDisplay = "all";
+    this.setState({ whatEvetsToDisplay });
+  };
+
+  handleDisplayPassed = () => {
+    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
+    whatEvetsToDisplay = "passed";
+    this.setState({ whatEvetsToDisplay });
+  };
+
+  handleDisplayUpcoming = () => {
+    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
+    whatEvetsToDisplay = "upcoming";
+    this.setState({ whatEvetsToDisplay });
+  };
+
+  displayedEvents = () => {
+    const events = [...this.state.events];
+    const currentTime = this.state.time;
+    let displayedEvents;
+    switch (this.state.whatEvetsToDisplay) {
+      case "upcoming":
+        displayedEvents = events.filter(
+          e => new Date(e.eventDate) > new Date(currentTime)
+        );
+        break;
+      case "passed":
+        displayedEvents = events.filter(
+          e => new Date(e.eventDate) < new Date(currentTime)
+        );
+        break;
+      default:
+        displayedEvents = events;
+    }
+    return displayedEvents;
+  };
+
   render() {
     document.body.style.backgroundColor = "#fff6f3";
     return (
@@ -212,8 +252,9 @@ class App extends Component {
           onDeleteAll={this.handleDeleteAll}
           onSortAscending={this.handleSortAscending}
           onSortDescending={this.handleSortDescending}
-          onSortByKey={this.handleSortByKey}
-          onSort={this.handleSort}
+          onDisplayPassed={this.handleDisplayPassed}
+          onDisplayAll={this.handleDisplayAll}
+          onDisplayUpcoming={this.handleDisplayUpcoming}
           onReadCookie={this.handleReadCookie}
           onWriteCookie={this.handleWriteCookie}
         />
@@ -228,7 +269,7 @@ class App extends Component {
             </div>
           </div>
           <TimerList
-            events={this.state.events}
+            events={this.displayedEvents(this.state.events)}
             time={this.state.time}
             onDelete={this.handleDelete}
             onToggleEditor={this.handleToggleEditor}

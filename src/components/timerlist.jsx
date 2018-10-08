@@ -33,7 +33,7 @@ const TimerList = ({
           key={event.eventId}
         />
       ))}
-      <div className="container text-center m-4 bottom-filler" />
+      <div className="container m-4 bottom-filler" />
     </React.Fragment>
   );
 };

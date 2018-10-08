@@ -7,6 +7,9 @@ const NavBar = ({
   onSortAscending,
   onSortDescending,
   onSortByKey,
+  onDisplayPassed,
+  onDisplayAll,
+  onDisplayUpcoming,
   onWriteCookie,
   onReadCookie
 }) => {
@@ -35,7 +38,7 @@ const NavBar = ({
             className="btn btn-outline-primary btn-lg"
             onClick={onSortAscending}
           >
-            ▲
+            🡅
           </button>
           <button
             className="btn btn-outline-primary btn-lg"
@@ -49,7 +52,28 @@ const NavBar = ({
             className="btn btn-outline-primary btn-lg "
             onClick={onSortDescending}
           >
-            ▼
+            🡇
+          </button>
+        </div>
+
+        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
+          <button
+            className="btn btn-outline-primary btn-lg"
+            onClick={onDisplayPassed}
+          >
+            🡄
+          </button>
+          <button
+            className="btn btn-outline-primary btn-lg"
+            onClick={onDisplayAll}
+          >
+            🡀🡂
+          </button>
+          <button
+            className="btn btn-outline-primary btn-lg "
+            onClick={onDisplayUpcoming}
+          >
+            🡆
           </button>
         </div>
 

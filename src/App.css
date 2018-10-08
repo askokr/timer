@@ -157,3 +157,23 @@
     rgba(236, 132, 132, 0) 100%
   );
 }
+
+.shadowy {
+  box-shadow: 5px 5px 5px 5px #888888;
+}
+.shadowy:hover {
+  box-shadow: 2px 2px 2px 2px #6b6b6b;
+  transform: scale(1.03);
+}
+
+.shadowy h2 {
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+  background: linear-gradient(
+    to right,
+    rgba(229, 221, 218, 0) 0%,
+    rgba(229, 221, 218, 0.6) 40%,
+    rgba(229, 221, 218, 0.6) 60%,
+    rgba(229, 221, 218, 0) 100%
+  );
+}

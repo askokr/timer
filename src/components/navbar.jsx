@@ -35,7 +35,7 @@ const NavBar = ({
             className="btn btn-outline-primary btn-lg"
             onClick={onSortAscending}
           >
-            ⇑
+            ▲
           </button>
           <button
             className="btn btn-outline-primary btn-lg"
@@ -49,7 +49,7 @@ const NavBar = ({
             className="btn btn-outline-primary btn-lg "
             onClick={onSortDescending}
           >
-            ⇓
+            ▼
           </button>
         </div>
 

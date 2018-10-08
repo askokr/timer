@@ -22,12 +22,12 @@ const Clock = ({ time }) => {
     "December"
   ];
   return (
-    <h1 className="text-white">
+    <h2 className="text-white">
       {d + ". "}
-      {months[M] + " "}
-      {y + "     "}
+      {months[M] + ", "}
+      {y + " "}
       {h % 24}:{m < 10 ? "0" + m : m}:{s < 10 ? "0" + s : s}
-    </h1>
+    </h2>
   );
 };
 

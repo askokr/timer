@@ -96,9 +96,9 @@ class AddEvent extends Component {
 
   dafaultView() {
     return (
-      <div className="containe timer-containerr">
+      <div className="container timer-container text-center m-4">
         <button
-          className="container editor-container text-center m-4 btn btn-warning"
+          className="container text-cente btn btn-warning shadowy"
           onClick={this.handleToggleEditor}
         >
           <h2>Add Event</h2>

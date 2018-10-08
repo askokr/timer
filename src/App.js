@@ -12,38 +12,39 @@ class App extends Component {
     areYouAddingAnEvent: false,
     events: [
       {
+        eventName: "",
+        eventDate: "",
+        imageUrl: "",
+        eventId: 0
+      },
+      {
         eventName: "Christmas Eve",
         eventDate: "",
         imageUrl:
           "http://upperallenfire.com/wp/wp-content/uploads/2013/12/Christmas-Tree-and-Fireplace.jpg",
-        eventId: 0
+        eventId: 1
       },
       {
         eventName: "St John's Eve",
         eventDate: "",
         imageUrl:
           "http://www.kultuurivara.ee/wp-content/uploads/2017/06/LigoMidsummerday-2.jpg",
-        eventId: 1
+        eventId: 2
       },
       {
         eventName: "Time left at ValiIT!",
         eventDate: "November 19, 2018 17:00",
         imageUrl: "http://tiny.cc/xnumzy",
-        eventId: 2
+        eventId: 3
       },
       {
         eventName: " End of ValiIT! theory course",
         eventDate: "September 24, 2018 17:00",
         imageUrl:
           "https://cdn-images-1.medium.com/max/2000/1*9Cqyu3Lx4BKHUZShGe5cuQ.jpeg",
-        eventId: 3
+        eventId: 4
       }
-    ],
-    newEvent: {
-      eventName: "",
-      eventDate: "",
-      imageUrl: ""
-    }
+    ]
   };
 
   componentDidMount() {
@@ -90,8 +91,8 @@ class App extends Component {
     const events = [...this.state.events];
     const newChristmasDate = "December 24, " + christmasYear;
     const newStJohnsDate = "June 23, " + stJohnsYear;
-    events[0].eventDate = newChristmasDate;
-    events[1].eventDate = newStJohnsDate;
+    events[1].eventDate = newChristmasDate;
+    events[2].eventDate = newStJohnsDate;
     console.log(events);
     this.setState({ events });
   };
@@ -142,50 +143,32 @@ class App extends Component {
   };
 
   handleEventName = e => {
-    let value = e.target.value;
-    this.setState(
-      prevState => ({
-        newEvent: {
-          ...prevState.newEvent,
-          eventName: value
-        }
-      }),
-      () => console.log(this.state.event)
-    );
+    const value = e.target.value;
+    const events = [...this.state.events];
+    events[0].eventName = value;
+    this.setState({ events });
   };
 
   handleEventDate = e => {
     const value = e.valueOf();
-    this.setState(
-      prevState => ({
-        newEvent: {
-          ...prevState.newEvent,
-          eventDate: value
-        }
-      }),
-      () => console.log(value)
-    );
+    const events = [...this.state.events];
+    events[0].eventDate = value;
+    this.setState({ events });
   };
 
   handleImageUrl = e => {
-    let value = e.target.value;
-    this.setState(
-      prevState => ({
-        newEvent: {
-          ...prevState.newEvent,
-          imageUrl: value
-        }
-      }),
-      () => console.log(value)
-    );
+    const value = e.target.value;
+    const events = [...this.state.events];
+    events[0].imageUrl = value;
+    this.setState({ events });
   };
 
   handleFormSubmit = e => {
     e.preventDefault();
     this.handleToggleEditor();
-    const newEventName = this.state.newEvent.eventName;
-    const newEventDate = this.state.newEvent.eventDate;
-    const newImageUrl = this.state.newEvent.imageUrl;
+    const newEventName = this.state.events[0].eventName;
+    const newEventDate = this.state.events[0].eventDate;
+    const newImageUrl = this.state.events[0].imageUrl;
     const newEventId = this.state.time;
     const newEvent = {
       eventName: newEventName,

@@ -13,7 +13,7 @@ const TimerList = ({
   onEventDate,
   onImageUrl
 }) => {
-  const eventsToRender = events;
+  const eventsToRender = events.filter(event => event.eventId !== 0);
   return (
     <React.Fragment>
       <AddEvent

@@ -96,14 +96,14 @@ class AddEvent extends Component {
 
   dafaultView() {
     return (
-      <button
-        className="container editor-container text-center m-4 btn btn-warning"
-        onClick={this.handleToggleEditor}
-      >
-        <div>
+      <div className="containe timer-containerr">
+        <button
+          className="container editor-container text-center m-4 btn btn-warning"
+          onClick={this.handleToggleEditor}
+        >
           <h2>Add Event</h2>
-        </div>
-      </button>
+        </button>
+      </div>
     );
   }
 }

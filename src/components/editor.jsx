@@ -22,7 +22,7 @@ class Editor extends Component {
         >
           <button
             onClick={this.props.onToggleEditor}
-            className="btn btn-danger m-2"
+            className="btn btn-danger m-4"
           >
             Close
           </button>
@@ -37,7 +37,7 @@ class Editor extends Component {
         >
           <button
             onClick={this.props.onToggleEventEditor}
-            className="btn btn-danger m-2"
+            className="btn btn-danger m-4"
           >
             Close editor
           </button>
@@ -49,7 +49,11 @@ class Editor extends Component {
   editButton = () => {
     if (this.props.whatEventAreYouEditing === null) {
       return (
-        <Tooltip TransitionComponent={Zoom} title="Add event to list">
+        <Tooltip
+          TransitionComponent={Zoom}
+          placement="top"
+          title="Add event to list"
+        >
           <button
             onClick={this.props.onFormSubmit}
             className="btn btn-warning m-4"
@@ -62,6 +66,7 @@ class Editor extends Component {
       return (
         <Tooltip
           TransitionComponent={Zoom}
+          placement="top"
           title="Save the changes you have made to the event"
         >
           <button
@@ -137,10 +142,25 @@ class Editor extends Component {
                 />
               </div>
             </div>
-            <div>{this.editButton()}</div>
           </form>
 
-          <div>{this.closeButton()}</div>
+          <div className="d-flex flex-row justify-content-around">
+            {/* <div className="p-2 bd-highlight" style={{ width: "50%" }}>
+              <img
+                src={imageUrl}
+                style={{
+                  maxWidth: "50%",
+                  maxHeight: "90%",
+                  border: "double black"
+                }}
+              />
+            </div> */}
+            {/* <div className="p-2 row align-middle" style={{ width: "50%" }}> */}
+            <div>
+              <div>{this.editButton()}</div>
+              <div>{this.closeButton()}</div>
+            </div>
+          </div>
         </div>
       </div>
     );

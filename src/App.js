@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import TimerList from "./components/timerlist";
 import NavBar from "./components/navbar";
+import Footer from "./components/footer";
 
 class App extends Component {
   state = {
@@ -22,14 +23,14 @@ class App extends Component {
         eventName: "Christmas Eve",
         eventDate: "",
         imageUrl:
-          "http://upperallenfire.com/wp/wp-content/uploads/2013/12/Christmas-Tree-and-Fireplace.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/f/fa/Happy_new_year_06463.jpg",
         eventId: 1
       },
       {
         eventName: "St John's Eve",
         eventDate: "",
         imageUrl:
-          "http://www.kultuurivara.ee/wp-content/uploads/2017/06/LigoMidsummerday-2.jpg",
+          "https://upload.wikimedia.org/wikipedia/commons/8/84/MidsummerNightBonfire.jpg",
         eventId: 2
       },
       {
@@ -48,26 +49,12 @@ class App extends Component {
     ]
   };
 
+  //the place to create a state, make ajax calls etc
   componentDidMount() {
     setInterval(this.update, 1000);
     this.updateYears();
+    console.log("did mount");
   }
-
-  update = () => {
-    this.setState({
-      time: new Date()
-    });
-    switch (this.state.sortDirection) {
-      case "descending":
-        this.handleSortDescending();
-        break;
-      case "ascending":
-        this.handleSortAscending();
-        break;
-      default:
-        this.handleSortByKey();
-    }
-  };
 
   //Automatically calculate next year for events
   updateYears = () => {
@@ -94,8 +81,27 @@ class App extends Component {
     const newStJohnsDate = "June 23, " + stJohnsYear;
     events[1].eventDate = newChristmasDate;
     events[2].eventDate = newStJohnsDate;
-    console.log(events);
     this.setState({ events });
+  };
+
+  update = () => {
+    this.setState({
+      time: new Date()
+    });
+    this.rememberSortorder();
+  };
+
+  rememberSortorder = () => {
+    switch (this.state.sortDirection) {
+      case "descending":
+        this.handleSortDescending();
+        break;
+      case "ascending":
+        this.handleSortAscending();
+        break;
+      default:
+        this.handleSortByKey();
+    }
   };
 
   clearForm = () => {
@@ -123,7 +129,6 @@ class App extends Component {
     events[0].eventName = event.eventName;
     events[0].eventDate = event.eventDate;
     events[0].imageUrl = event.imageUrl;
-    console.log(events[0]);
   };
 
   handleToggleEventEditor = () => {
@@ -330,14 +335,7 @@ class App extends Component {
             whatEventAreYouEditing={this.state.whatEventAreYouEditing}
           />
         </main>
-        <footer>
-          <div
-            className="container timer-container m-4"
-            style={{ color: "white", textShadow: "1px 1px gray " }}
-          >
-            <span>© Asko Kriiska, 2018</span>
-          </div>
-        </footer>
+        <Footer />
       </React.Fragment>
     );
   }

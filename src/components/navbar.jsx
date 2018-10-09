@@ -2,6 +2,7 @@ import React from "react";
 import Clock from "./clock";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+import Octicon from "react-octicon";
 
 let isThereACookie = document.cookie !== "" ? true : false;
 
@@ -78,9 +79,7 @@ const NavBar = ({
               }
               onClick={onSortByKey}
             >
-              <span role="img" aria-label="by id" aria-labelledby="me">
-                🖊
-              </span>
+              <Octicon name="pencil" />
             </button>
           </Tooltip>
           <Tooltip TransitionComponent={Zoom} title="Sort in descending order">

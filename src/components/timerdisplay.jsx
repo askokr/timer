@@ -3,6 +3,7 @@ import timerFunction from "./timerfunction";
 import datetimeStringFunction from "./datetimeStringFunction";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+import Octicon from "react-octicon";
 import "../App.css";
 
 class TimerDisplay extends Component {
@@ -46,9 +47,7 @@ class TimerDisplay extends Component {
                     className="btn btn-danger btn-lg"
                     onClick={() => onDelete(eventId)}
                   >
-                    <span role="img" aria-label="Delete">
-                      🗑
-                    </span>
+                    <Octicon name="trashcan" mega />
                   </button>
                 </Tooltip>
                 <Tooltip
@@ -60,9 +59,7 @@ class TimerDisplay extends Component {
                     className="btn btn-success btn-lg"
                     onClick={() => onEdit(eventId)}
                   >
-                    <span role="img" aria-label="Edit">
-                      🔨
-                    </span>
+                    <Octicon name="tools" mega />
                   </button>
                 </Tooltip>
               </div>

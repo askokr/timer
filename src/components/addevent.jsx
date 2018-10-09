@@ -31,7 +31,7 @@ class AddEvent extends Component {
         <Tooltip
           TransitionComponent={Zoom}
           placement="top"
-          title="Add new event to list"
+          title="Add new event"
         >
           <button
             className="container text-cente btn btn-warning shadowy"

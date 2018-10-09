@@ -7,11 +7,14 @@ class AddEvent extends Component {
       <React.Fragment>
         {this.props.areYouAddingAnEvent ? (
           <Editor
-            onToggleEditor={this.props.onToggleEditor}
-            onFormSubmit={this.props.onFormSubmit}
-            onEventName={this.props.onEventName}
+            areYouAddingAnEvent={this.props.areYouAddingAnEvent}
+            editableEvent={this.props.editableEvent}
             onEventDate={this.props.onEventDate}
+            onEventName={this.props.onEventName}
             onImageUrl={this.props.onImageUrl}
+            onFormSubmit={this.props.onFormSubmit}
+            onToggleEditor={this.props.onToggleEditor}
+            whatEventAreYouEditing={this.props.whatEventAreYouEditing}
           />
         ) : (
           <React.Fragment>{this.dafaultView()}</React.Fragment>

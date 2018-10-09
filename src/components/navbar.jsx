@@ -2,16 +2,18 @@ import React from "react";
 import Clock from "./clock";
 
 const NavBar = ({
-  time,
   onDeleteAll,
-  onSortAscending,
-  onSortDescending,
-  onSortByKey,
-  onDisplayPassed,
   onDisplayAll,
+  onDisplayPassed,
   onDisplayUpcoming,
+  onReadCookie,
+  onSortAscending,
+  onSortByKey,
+  onSortDescending,
   onWriteCookie,
-  onReadCookie
+  sortDirection,
+  time,
+  whatEvetsToDisplay
 }) => {
   return (
     <nav className="navbar sticky-top navbar-light bg-dark">
@@ -26,54 +28,14 @@ const NavBar = ({
             Save
           </button>
           <button
-            className="btn btn-outline-success btn-lg "
+            className={
+              "btn btn-lg btn-" +
+              (document.cookie !== "" ? "" : "outline-") +
+              "success"
+            }
             onClick={onReadCookie}
           >
             Load
-          </button>
-        </div>
-
-        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={onSortAscending}
-          >
-            🡅
-          </button>
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={onSortByKey}
-          >
-            <span role="img" aria-label="by id" aria-labelledby="me">
-              🔑
-            </span>
-          </button>
-          <button
-            className="btn btn-outline-primary btn-lg "
-            onClick={onSortDescending}
-          >
-            🡇
-          </button>
-        </div>
-
-        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={onDisplayPassed}
-          >
-            🡄
-          </button>
-          <button
-            className="btn btn-outline-primary btn-lg"
-            onClick={onDisplayAll}
-          >
-            🡀🡂
-          </button>
-          <button
-            className="btn btn-outline-primary btn-lg "
-            onClick={onDisplayUpcoming}
-          >
-            🡆
           </button>
         </div>
 
@@ -83,6 +45,74 @@ const NavBar = ({
         >
           Clear all events
         </button>
+
+        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (sortDirection === "ascending" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onSortAscending}
+          >
+            🡅
+          </button>
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (sortDirection === "byKey" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onSortByKey}
+          >
+            <span role="img" aria-label="by id" aria-labelledby="me">
+              🖊
+            </span>
+          </button>
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (sortDirection === "descending" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onSortDescending}
+          >
+            🡇
+          </button>
+        </div>
+
+        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (whatEvetsToDisplay === "passed" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onDisplayPassed}
+          >
+            🡄
+          </button>
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (whatEvetsToDisplay === "all" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onDisplayAll}
+          >
+            🡀🡂
+          </button>
+          <button
+            className={
+              "btn btn-lg btn-" +
+              (whatEvetsToDisplay === "upcoming" ? "" : "outline-") +
+              "primary"
+            }
+            onClick={onDisplayUpcoming}
+          >
+            🡆
+          </button>
+        </div>
       </div>
       <Clock time={time} />
     </nav>

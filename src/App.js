@@ -10,6 +10,7 @@ class App extends Component {
     sortDirection: "byKey",
     whatEvetsToDisplay: "all",
     areYouAddingAnEvent: false,
+    whatEventAreYouEditing: null,
     events: [
       {
         eventName: "",
@@ -97,6 +98,39 @@ class App extends Component {
     this.setState({ events });
   };
 
+  clearForm = () => {
+    let events = [...this.state.events];
+    events[0] = {
+      eventName: "",
+      eventDate: "",
+      imageUrl: "",
+      eventId: 0
+    };
+    this.setState({ events });
+  };
+
+  handleEdit = eventId => {
+    let areYouAddingAnEvent = this.state.areYouAddingAnEvent;
+    if (areYouAddingAnEvent) {
+      areYouAddingAnEvent = false;
+      this.setState({ areYouAddingAnEvent });
+    }
+    const event = this.state.events.find(c => c.eventId === eventId);
+    const whatEventAreYouEditing = eventId;
+    this.setState({ whatEventAreYouEditing });
+
+    const events = [...this.state.events];
+    events[0].eventName = event.eventName;
+    events[0].eventDate = event.eventDate;
+    events[0].imageUrl = event.imageUrl;
+    console.log(events[0]);
+  };
+
+  handleToggleEventEditor = () => {
+    const whatEventAreYouEditing = null;
+    this.setState({ whatEventAreYouEditing });
+  };
+
   handleDelete = eventId => {
     const events = this.state.events.filter(c => c.eventId !== eventId);
     this.setState({ events });
@@ -165,23 +199,50 @@ class App extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.handleToggleEditor();
     const newEventName = this.state.events[0].eventName;
     const newEventDate = this.state.events[0].eventDate;
     const newImageUrl = this.state.events[0].imageUrl;
-    const newEventId = this.state.time;
-    const newEvent = {
-      eventName: newEventName,
-      eventDate: newEventDate,
-      imageUrl: newImageUrl,
-      eventId: newEventId
+    let events = [...this.state.events];
+
+    if (this.state.areYouAddingAnEvent === true) {
+      const newEventId = this.state.time;
+      const newEvent = {
+        eventName: newEventName,
+        eventDate: newEventDate,
+        imageUrl: newImageUrl,
+        eventId: newEventId
+      };
+      events.push(newEvent);
+
+      const areYouAddingAnEvent = false;
+      this.setState({ areYouAddingAnEvent });
+    } else {
+      console.log("this hapens"); //this deos, in fact, not hapen :-/
+      let whatEventAreYouEditing = this.state.whatEventAreYouEditing;
+      var indexOfEvent = events.findIndex(
+        i => i.eventId === whatEventAreYouEditing
+      );
+      events[indexOfEvent].eventName = newEventName;
+      events[indexOfEvent].eventDate = newEventDate;
+      events[indexOfEvent].imageUrl = newImageUrl;
+
+      whatEventAreYouEditing = null;
+      this.setState({ whatEventAreYouEditing });
+    }
+    events[0] = {
+      eventName: "",
+      eventDate: "",
+      imageUrl: "",
+      eventId: 0
     };
-    const events = [...this.state.events];
-    events.push(newEvent);
     this.setState({ events });
   };
 
   handleToggleEditor = () => {
+    this.clearForm();
+    if (this.state.whatEventAreYouEditing !== null) {
+      this.handleToggleEventEditor();
+    }
     this.setState(prevState => ({
       areYouAddingAnEvent: !prevState.areYouAddingAnEvent
     }));
@@ -231,15 +292,18 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar
-          time={this.state.time}
           onDeleteAll={this.handleDeleteAll}
-          onSortAscending={this.handleSortAscending}
-          onSortDescending={this.handleSortDescending}
-          onDisplayPassed={this.handleDisplayPassed}
           onDisplayAll={this.handleDisplayAll}
+          onDisplayPassed={this.handleDisplayPassed}
           onDisplayUpcoming={this.handleDisplayUpcoming}
           onReadCookie={this.handleReadCookie}
+          onSortAscending={this.handleSortAscending}
+          onSortByKey={this.handleSortByKey}
+          onSortDescending={this.handleSortDescending}
           onWriteCookie={this.handleWriteCookie}
+          sortDirection={this.state.sortDirection}
+          time={this.state.time}
+          whatEvetsToDisplay={this.state.whatEvetsToDisplay}
         />
         <main>
           <div className="jumbotron jumbotron-fluid">
@@ -252,15 +316,18 @@ class App extends Component {
             </div>
           </div>
           <TimerList
+            areYouAddingAnEvent={this.state.areYouAddingAnEvent}
             events={this.displayedEvents(this.state.events)}
             time={this.state.time}
             onDelete={this.handleDelete}
-            onToggleEditor={this.handleToggleEditor}
-            areYouAddingAnEvent={this.state.areYouAddingAnEvent}
-            onFormSubmit={this.handleFormSubmit}
-            onEventName={this.handleEventName}
+            onEdit={this.handleEdit}
             onEventDate={this.handleEventDate}
+            onEventName={this.handleEventName}
+            onFormSubmit={this.handleFormSubmit}
             onImageUrl={this.handleImageUrl}
+            onToggleEditor={this.handleToggleEditor}
+            onToggleEventEditor={this.handleToggleEventEditor}
+            whatEventAreYouEditing={this.state.whatEventAreYouEditing}
           />
         </main>
       </React.Fragment>

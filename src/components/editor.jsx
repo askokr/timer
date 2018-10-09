@@ -10,8 +10,52 @@ Moment.locale("en-gb", {
 });
 
 class Editor extends Component {
+  closeButton = () => {
+    if (this.props.whatEventAreYouEditing === null) {
+      return (
+        <button
+          onClick={this.props.onToggleEditor}
+          className="btn btn-danger m-2"
+        >
+          Close
+        </button>
+      );
+    } else {
+      return (
+        <button
+          onClick={this.props.onToggleEventEditor}
+          className="btn btn-danger m-2"
+        >
+          Close editor
+        </button>
+      );
+    }
+  };
+
+  editButton = () => {
+    if (this.props.whatEventAreYouEditing === null) {
+      return (
+        <button
+          onClick={this.props.onFormSubmit}
+          className="btn btn-warning m-4"
+        >
+          Add new event
+        </button>
+      );
+    } else {
+      return (
+        <button
+          onClick={this.props.onFormSubmit}
+          className="btn btn-warning m-4"
+        >
+          Save edits to event
+        </button>
+      );
+    }
+  };
+
   render() {
-    const { eventName, eventDate, imageUrl } = this.props;
+    const { eventName, eventDate, imageUrl } = this.props.editableEvent;
     return (
       <div className="container editor-container text-center m-4">
         <div
@@ -72,22 +116,10 @@ class Editor extends Component {
                 />
               </div>
             </div>
-            <button
-              onClick={this.props.onFormSubmit}
-              className="btn btn-warning m-4"
-            >
-              Add new event
-            </button>
+            <div>{this.editButton()}</div>
           </form>
 
-          <div>
-            <button
-              onClick={this.props.onToggleEditor}
-              className="btn btn-danger m-2"
-            >
-              Close
-            </button>
-          </div>
+          <div>{this.closeButton()}</div>
         </div>
       </div>
     );

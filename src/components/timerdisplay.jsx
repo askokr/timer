@@ -6,7 +6,7 @@ import "../App.css";
 class TimerDisplay extends Component {
   render() {
     const props = this.props;
-    const { event, onDelete } = props;
+    const { event, onDelete, onEdit } = props;
     const { eventName, eventDate, eventId, imageUrl } = event;
     const backgroundImage = {
       backgroundImage: `url(${imageUrl})`
@@ -39,14 +39,18 @@ class TimerDisplay extends Component {
                   className="btn btn-danger btn-lg"
                   onClick={() => onDelete(eventId)}
                 >
-                  <span role="img">🗑</span>
+                  <span role="img" aria-label="Delete">
+                    🗑
+                  </span>
                 </button>
-                {/* <button
-                  className="btn btn-outline-success btn-lg"
+                <button
+                  className="btn btn-success btn-lg"
                   onClick={() => onEdit(eventId)}
                 >
-                  <span>🔨</span>
-                </button> */}
+                  <span role="img" aria-label="Edit">
+                    🔨
+                  </span>
+                </button>
               </div>
             </div>
           </div>

@@ -272,24 +272,30 @@ class App extends Component {
   };
 
   displayedEvents = () => {
-    const events = [...this.state.events];
+    let events = [...this.state.events];
     const currentTime = this.state.time;
-    let displayedEvents;
+
+    const theZeroeth = events.shift();
+    let sortedEvents;
     switch (this.state.whatEvetsToDisplay) {
       case "upcoming":
-        displayedEvents = events.filter(
+        sortedEvents = events.filter(
           e => new Date(e.eventDate) > new Date(currentTime)
         );
         break;
       case "passed":
-        displayedEvents = events.filter(
+        sortedEvents = events.filter(
           e => new Date(e.eventDate) < new Date(currentTime)
         );
         break;
       default:
-        displayedEvents = events;
+        sortedEvents = events;
     }
-    return displayedEvents;
+
+    console.log(sortedEvents);
+    sortedEvents.unshift(theZeroeth);
+    console.log(sortedEvents);
+    return sortedEvents;
   };
 
   render() {

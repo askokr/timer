@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import timerFunction from "./timerfunction";
 import datetimeStringFunction from "./datetimeStringFunction";
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 import "../App.css";
 
 class TimerDisplay extends Component {
@@ -35,22 +37,34 @@ class TimerDisplay extends Component {
             </div>
             <div className="p-2 flex-shrink-1">
               <div className="text-container-button">
-                <button
-                  className="btn btn-danger btn-lg"
-                  onClick={() => onDelete(eventId)}
+                <Tooltip
+                  TransitionComponent={Zoom}
+                  placement="left"
+                  title="Delete this event"
                 >
-                  <span role="img" aria-label="Delete">
-                    🗑
-                  </span>
-                </button>
-                <button
-                  className="btn btn-success btn-lg"
-                  onClick={() => onEdit(eventId)}
+                  <button
+                    className="btn btn-danger btn-lg"
+                    onClick={() => onDelete(eventId)}
+                  >
+                    <span role="img" aria-label="Delete">
+                      🗑
+                    </span>
+                  </button>
+                </Tooltip>
+                <Tooltip
+                  TransitionComponent={Zoom}
+                  placement="left"
+                  title="Edit this event"
                 >
-                  <span role="img" aria-label="Edit">
-                    🔨
-                  </span>
-                </button>
+                  <button
+                    className="btn btn-success btn-lg"
+                    onClick={() => onEdit(eventId)}
+                  >
+                    <span role="img" aria-label="Edit">
+                      🔨
+                    </span>
+                  </button>
+                </Tooltip>
               </div>
             </div>
           </div>

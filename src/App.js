@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.css";
 import TimerList from "./components/timerlist";
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 class App extends Component {
   state = {
@@ -142,7 +142,18 @@ class App extends Component {
   };
 
   handleDeleteAll = () => {
-    const events = [];
+    const areYouAddingAnEvent = false;
+    const whatEventAreYouEditing = null;
+    const events = [
+      {
+        eventName: "",
+        eventDate: "",
+        imageUrl: "",
+        eventId: 0
+      }
+    ];
+    this.setState({ areYouAddingAnEvent });
+    this.setState({ whatEventAreYouEditing });
     this.setState({ events });
   };
 
@@ -173,11 +184,17 @@ class App extends Component {
   handleReadCookie = () => {
     const eventsString = document.cookie;
     const events = JSON.parse(eventsString);
+
+    console.log(eventsString);
+    console.log(events);
     this.setState({ events });
   };
 
   handleWriteCookie = () => {
-    const list = JSON.stringify(this.state.events);
+    const events = [...this.state.events];
+    const list = JSON.stringify(events);
+    console.log(events);
+    console.log(list);
     document.cookie = list;
   };
 
@@ -274,7 +291,6 @@ class App extends Component {
   displayedEvents = () => {
     let events = [...this.state.events];
     const currentTime = this.state.time;
-
     const theZeroeth = events.shift();
     let sortedEvents;
     switch (this.state.whatEvetsToDisplay) {
@@ -291,10 +307,7 @@ class App extends Component {
       default:
         sortedEvents = events;
     }
-
-    console.log(sortedEvents);
     sortedEvents.unshift(theZeroeth);
-    console.log(sortedEvents);
     return sortedEvents;
   };
 

@@ -3,6 +3,7 @@ import Moment from "moment";
 import DateTime from "react-datetime";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+import Octicon from "react-octicon";
 import "./stylesheets/react-datetime.css";
 
 Moment.locale("en-gb", {
@@ -93,9 +94,7 @@ class Editor extends Component {
               <div className="col">
                 <div className="input-group mb-3 m-2">
                   <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">
-                      Event name:
-                    </span>
+                    <span className="input-group-text">Event name:</span>
                   </div>
                   <input
                     id={eventName}
@@ -113,9 +112,7 @@ class Editor extends Component {
               <div className="col">
                 <div className="input-group mb-3 m-2">
                   <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">
-                      Event date:
-                    </span>
+                    <span className="input-group-text">Event date:</span>
                   </div>
                   <DateTime
                     value={eventDate}
@@ -128,9 +125,7 @@ class Editor extends Component {
             <div className="form-row">
               <div className="input-group mb-3 m-3">
                 <div className="input-group-prepend">
-                  <span className="input-group-text" id="basic-addon1">
-                    Image URL:
-                  </span>
+                  <span className="input-group-text">Image URL:</span>
                 </div>
                 <input
                   type="url"
@@ -140,6 +135,14 @@ class Editor extends Component {
                   name="imageUrl"
                   onChange={this.props.onImageUrl}
                 />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-secondary"
+                    // onClick={() => onDelete(eventId)}
+                  >
+                    <Octicon name="unverified" />
+                  </button>
+                </div>
               </div>
             </div>
           </form>

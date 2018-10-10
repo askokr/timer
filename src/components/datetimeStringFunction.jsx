@@ -20,7 +20,18 @@ function datetimeStringFunction(eventDate) {
     "November",
     "December"
   ];
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Thursday",
+    "Wednesday",
+    "Fryday",
+    "Satturday"
+  ];
   const dateString =
+    days[rawDate.getDay()] +
+    ", " +
     months[rawDate.getMonth()] +
     " " +
     rawDate.getDate() +

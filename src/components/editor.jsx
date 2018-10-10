@@ -1,151 +1,36 @@
 import React, { Component } from "react";
-import Moment from "moment";
-import DateTime from "react-datetime";
-import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
-import Octicon from "react-octicon";
+import Form from "./EditorElements/form";
+import CloseButton from "./EditorElements/colseButton";
+import EditButton from "./EditorElements/editButton";
 import "./stylesheets/react-datetime.css";
 
-Moment.locale("en-gb", {
-  week: {
-    dow: 1 // Monday is the first day of the week.
-  }
-});
-
 class Editor extends Component {
-  closeButton = () => {
-    if (this.props.whatEventAreYouEditing === null) {
-      return (
-        <Tooltip
-          TransitionComponent={Zoom}
-          placement="top"
-          title="Cancel adding new event, clear all field"
-        >
-          <button
-            onClick={this.props.onToggleEditor}
-            className="btn btn-danger m-4"
-          >
-            Close
-          </button>
-        </Tooltip>
-      );
-    } else {
-      return (
-        <Tooltip
-          TransitionComponent={Zoom}
-          placement="top"
-          title="Cancel editing this event, keep all old values"
-        >
-          <button
-            onClick={this.props.onToggleEventEditor}
-            className="btn btn-danger m-4"
-          >
-            Close editor
-          </button>
-        </Tooltip>
-      );
-    }
-  };
-
-  editButton = () => {
-    if (this.props.whatEventAreYouEditing === null) {
-      return (
-        <Tooltip
-          TransitionComponent={Zoom}
-          placement="top"
-          title="Add event to list"
-        >
-          <button
-            onClick={this.props.onFormSubmit}
-            className="btn btn-warning m-4"
-          >
-            Add new event
-          </button>
-        </Tooltip>
-      );
-    } else {
-      return (
-        <Tooltip
-          TransitionComponent={Zoom}
-          placement="top"
-          title="Save the changes you have made to the event"
-        >
-          <button
-            onClick={this.props.onFormSubmit}
-            className="btn btn-warning m-4"
-          >
-            Save edits to event
-          </button>
-        </Tooltip>
-      );
-    }
-  };
-
   render() {
     const { eventName, eventDate, imageUrl } = this.props.editableEvent;
+    const {
+      onFormSubmit,
+      onEventName,
+      onEventDate,
+      onImageUrl,
+      onToggleEditor,
+      onToggleEventEditor,
+      whatEventAreYouEditing
+    } = this.props;
     return (
       <div className="container editor-container text-center m-4">
         <div
           className="editor-background"
           style={{ height: "350px", overflow: "hidden" }}
         >
-          <form className="container-fluid" onSubmit={this.props.onFormSubmit}>
-            <div className="form-row">
-              <div className="col">
-                <div className="input-group mb-3 m-2">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">Event name:</span>
-                  </div>
-                  <input
-                    id={eventName}
-                    className="form-control"
-                    name={eventName}
-                    type="text"
-                    value={eventName}
-                    maxLength="42"
-                    onChange={this.props.onEventName}
-                    placeholder={"Enter event name"}
-                  />
-                </div>
-              </div>
-
-              <div className="col">
-                <div className="input-group mb-3 m-2">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">Event date:</span>
-                  </div>
-                  <DateTime
-                    value={eventDate}
-                    inputProps={{ readOnly: true }}
-                    onChange={this.props.onEventDate}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="input-group mb-3 m-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">Image URL:</span>
-                </div>
-                <input
-                  type="url"
-                  className="form-control"
-                  placeholder="https://cutepicture.info"
-                  value={imageUrl}
-                  name="imageUrl"
-                  onChange={this.props.onImageUrl}
-                />
-                <div className="input-group-append">
-                  <button
-                    className="btn btn-secondary"
-                    // onClick={() => onDelete(eventId)}
-                  >
-                    <Octicon name="unverified" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
+          <Form
+            eventName={eventName}
+            eventDate={eventDate}
+            imageUrl={imageUrl}
+            onFormSubmit={onFormSubmit}
+            onEventName={onEventName}
+            onEventDate={onEventDate}
+            onImageUrl={onImageUrl}
+          />
 
           <div className="d-flex flex-row justify-content-around">
             {/* <div className="p-2 bd-highlight" style={{ width: "50%" }}>
@@ -160,8 +45,19 @@ class Editor extends Component {
             </div> */}
             {/* <div className="p-2 row align-middle" style={{ width: "50%" }}> */}
             <div>
-              <div>{this.editButton()}</div>
-              <div>{this.closeButton()}</div>
+              <div>
+                <EditButton
+                  onFormSubmit={onFormSubmit}
+                  whatEventAreYouEditing={whatEventAreYouEditing}
+                />
+              </div>
+              <div>
+                <CloseButton
+                  whatEventAreYouEditing={whatEventAreYouEditing}
+                  onToggleEditor={onToggleEditor}
+                  onToggleEventEditor={onToggleEventEditor}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import timerFunction from "./timerfunction";
-import datetimeStringFunction from "./datetimeStringFunction";
+import timerFunction from "./functions/timerfunction";
+import datetimeStringFunction from "./functions/datetimeStringFunction";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
 import Octicon from "react-octicon";

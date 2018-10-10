@@ -1,10 +1,9 @@
 import React from "react";
-import Clock from "./clock";
-import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
-import Octicon from "react-octicon";
-
-let isThereACookie = document.cookie !== "" ? true : false;
+import Clock from "./NavBarElements/clock";
+import SaveLoadButtonGruop from "./NavBarElements/saveLoadButtonGroup";
+import SortOrderButtonGroup from "./NavBarElements/sortOrderButtonGroup";
+import ElementsToDisplayButtonGroup from "./NavBarElements/elementsToDisplayButtonGroup";
+import DeleteAllButtonGroup from "./NavBarElements/deleteAllButtonGroup";
 
 const NavBar = ({
   onDeleteAll,
@@ -20,126 +19,33 @@ const NavBar = ({
   time,
   whatEvetsToDisplay
 }) => {
+  let isThereACookie = document.cookie !== "" ? true : false;
   return (
     <nav className="navbar sticky-top navbar-light bg-dark">
       <div className="row">
         {/* <h1 className="text-white m-4">Events</h1> */}
 
-        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
-          <Tooltip TransitionComponent={Zoom} title="Save events as a cookie">
-            <button
-              className="btn btn-outline-success btn-lg"
-              onClick={onWriteCookie}
-            >
-              Save
-            </button>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Load events from cookie">
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (isThereACookie ? "" : "outline-") +
-                "success"
-              }
-              onClick={onReadCookie}
-            >
-              Load
-            </button>
-          </Tooltip>
-        </div>
+        <SaveLoadButtonGruop
+          onReadCookie={onReadCookie}
+          onWriteCookie={onWriteCookie}
+          isThereACookie={isThereACookie}
+        />
 
-        <Tooltip TransitionComponent={Zoom} title="Delete all events">
-          <button
-            className="btn btn-outline-danger btn-lg m-2"
-            onClick={onDeleteAll}
-          >
-            Clear all events
-          </button>
-        </Tooltip>
+        <DeleteAllButtonGroup onDeleteAll={onDeleteAll} />
 
-        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
-          <Tooltip TransitionComponent={Zoom} title="Sort in ascending order">
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (sortDirection === "ascending" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onSortAscending}
-            >
-              🡅
-            </button>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Sort by order of addition">
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (sortDirection === "byKey" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onSortByKey}
-            >
-              <Octicon name="pencil" />
-            </button>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Sort in descending order">
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (sortDirection === "descending" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onSortDescending}
-            >
-              🡇
-            </button>
-          </Tooltip>
-        </div>
+        <SortOrderButtonGroup
+          onSortAscending={onSortAscending}
+          onSortByKey={onSortByKey}
+          onSortDescending={onSortDescending}
+          sortDirection={sortDirection}
+        />
 
-        <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
-          <Tooltip
-            TransitionComponent={Zoom}
-            title="Display passed events only"
-          >
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (whatEvetsToDisplay === "passed" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onDisplayPassed}
-            >
-              🡄
-            </button>
-          </Tooltip>
-          <Tooltip TransitionComponent={Zoom} title="Display all events">
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (whatEvetsToDisplay === "all" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onDisplayAll}
-            >
-              🡀🡂
-            </button>
-          </Tooltip>
-          <Tooltip
-            TransitionComponent={Zoom}
-            title="Display upcoming events only"
-          >
-            <button
-              className={
-                "btn btn-lg btn-" +
-                (whatEvetsToDisplay === "upcoming" ? "" : "outline-") +
-                "primary"
-              }
-              onClick={onDisplayUpcoming}
-            >
-              🡆
-            </button>
-          </Tooltip>
-        </div>
+        <ElementsToDisplayButtonGroup
+          onDisplayAll={onDisplayAll}
+          onDisplayPassed={onDisplayPassed}
+          onDisplayUpcoming={onDisplayUpcoming}
+          whatEvetsToDisplay={whatEvetsToDisplay}
+        />
       </div>
       <Clock time={time} />
     </nav>

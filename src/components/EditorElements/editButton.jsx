@@ -15,7 +15,7 @@ class EditButton extends Component {
           placement="top"
           title="Add event to list"
         >
-          <button onClick={onFormSubmit} className="btn btn-warning m-4">
+          <button onClick={onFormSubmit} className="btn btn-warning m-4 btn-lg">
             Add new event
           </button>
         </Tooltip>
@@ -27,7 +27,7 @@ class EditButton extends Component {
           placement="top"
           title="Save the changes you have made to the event"
         >
-          <button onClick={onFormSubmit} className="btn btn-warning m-4">
+          <button onClick={onFormSubmit} className="btn btn-warning m-4 btn-lg">
             Save edits to event
           </button>
         </Tooltip>

@@ -17,6 +17,11 @@ class Editor extends Component {
       onRandomImage,
       whatEventAreYouEditing
     } = this.props;
+    const backgroundImage = {
+      backgroundImage: `url(${imageUrl})`,
+      width: "400px",
+      height: "95px"
+    };
     return (
       <div className="container editor-container text-center m-4">
         <div
@@ -35,18 +40,17 @@ class Editor extends Component {
           />
 
           <div className="d-flex flex-row justify-content-around">
-            {/* <div className="p-2 bd-highlight" style={{ width: "50%" }}>
-              <img
-                src={imageUrl}
-                style={{
-                  maxWidth: "50%",
-                  maxHeight: "90%",
-                  border: "double black"
-                }}
+            <div className="p-2 bd-highlight">
+              <div
+                style={backgroundImage}
+                className="background-image shadowy"
               />
-            </div> */}
-            {/* <div className="p-2 row align-middle" style={{ width: "50%" }}> */}
-            <div>
+            </div>
+          </div>
+
+          <div className="d-flex flex-row justify-content-around">
+            <div className="p-2 row align-middle">
+              {/* <div> */}
               <div>
                 <EditButton
                   onFormSubmit={onFormSubmit}

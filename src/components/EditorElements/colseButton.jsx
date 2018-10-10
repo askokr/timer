@@ -20,7 +20,10 @@ class CloseButton extends Component {
           placement="top"
           title="Cancel adding new event, clear all field"
         >
-          <button onClick={onToggleEditor} className="btn btn-danger m-4">
+          <button
+            onClick={onToggleEditor}
+            className="btn btn-danger m-4 btn-lg"
+          >
             Close
           </button>
         </Tooltip>
@@ -32,7 +35,10 @@ class CloseButton extends Component {
           placement="top"
           title="Cancel editing this event, keep all old values"
         >
-          <button onClick={onToggleEventEditor} className="btn btn-danger m-4">
+          <button
+            onClick={onToggleEventEditor}
+            className="btn btn-danger m-4 btn-lg"
+          >
             Close editor
           </button>
         </Tooltip>

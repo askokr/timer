@@ -6,6 +6,7 @@ import Editor from "./editor";
 const TimerList = ({
   areYouAddingAnEvent,
   events,
+  oldImageUrl,
   onEdit,
   onDelete,
   onEventDate,
@@ -26,6 +27,7 @@ const TimerList = ({
       <AddEvent
         areYouAddingAnEvent={areYouAddingAnEvent}
         editableEvent={editableEvent}
+        oldImageUrl={oldImageUrl}
         onEventDate={onEventDate}
         onEventName={onEventName}
         onImageUrl={onImageUrl}
@@ -52,6 +54,7 @@ const TimerList = ({
               areYouAddingAnEvent={areYouAddingAnEvent}
               editableEvent={editableEvent}
               key={event.eventId}
+              oldImageUrl={oldImageUrl}
               onEventDate={onEventDate}
               onEventName={onEventName}
               onFormSubmit={onFormSubmit}

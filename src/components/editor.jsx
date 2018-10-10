@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Form from "./EditorElements/form";
 import CloseButton from "./EditorElements/colseButton";
 import EditButton from "./EditorElements/editButton";
+import ImageBox from "./EditorElements/imageBox";
 import "./stylesheets/react-datetime.css";
 
 class Editor extends Component {
   render() {
     const { eventDate, eventName, imageUrl } = this.props.editableEvent;
     const {
+      oldImageUrl,
       onEventDate,
       onEventName,
       onFormSubmit,
@@ -17,11 +19,7 @@ class Editor extends Component {
       onRandomImage,
       whatEventAreYouEditing
     } = this.props;
-    const backgroundImage = {
-      backgroundImage: `url(${imageUrl})`,
-      width: "400px",
-      height: "95px"
-    };
+
     return (
       <div className="container editor-container text-center m-4">
         <div
@@ -40,17 +38,15 @@ class Editor extends Component {
           />
 
           <div className="d-flex flex-row justify-content-around">
-            <div className="p-2 bd-highlight">
-              <div
-                style={backgroundImage}
-                className="background-image shadowy"
-              />
-            </div>
+            <ImageBox
+              newImageUrl={imageUrl}
+              oldImageUrl={oldImageUrl}
+              whatEventAreYouEditing={whatEventAreYouEditing}
+            />
           </div>
 
           <div className="d-flex flex-row justify-content-around">
             <div className="p-2 row align-middle">
-              {/* <div> */}
               <div>
                 <EditButton
                   onFormSubmit={onFormSubmit}

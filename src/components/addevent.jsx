@@ -11,6 +11,7 @@ class AddEvent extends Component {
           <Editor
             areYouAddingAnEvent={this.props.areYouAddingAnEvent}
             editableEvent={this.props.editableEvent}
+            oldImageUrl={this.props.oldImageUrl}
             onEventDate={this.props.onEventDate}
             onEventName={this.props.onEventName}
             onImageUrl={this.props.onImageUrl}

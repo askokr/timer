@@ -7,11 +7,12 @@ import "bootstrap/dist/css/bootstrap.css";
 
 class App extends Component {
   state = {
+    areYouAddingAnEvent: false,
+    oldImageUrl: undefined,
     time: new Date(),
     sortDirection: "byKey",
-    whatEvetsToDisplay: "all",
-    areYouAddingAnEvent: false,
     whatEventAreYouEditing: null,
+    whatEvetsToDisplay: "all",
     events: [
       {
         eventName: "",
@@ -123,6 +124,8 @@ class App extends Component {
     const event = this.state.events.find(c => c.eventId === eventId);
     const whatEventAreYouEditing = eventId;
     this.setState({ whatEventAreYouEditing });
+    const oldImageUrl = event.imageUrl;
+    this.setState({ oldImageUrl });
 
     const events = [...this.state.events];
     events[0].eventName = event.eventName;
@@ -132,7 +135,9 @@ class App extends Component {
 
   handleToggleEventEditor = () => {
     const whatEventAreYouEditing = null;
+    const oldImageUrl = undefined;
     this.setState({ whatEventAreYouEditing });
+    this.setState({ oldImageUrl });
   };
 
   handleDelete = eventId => {
@@ -142,6 +147,7 @@ class App extends Component {
 
   handleDeleteAll = () => {
     const areYouAddingAnEvent = false;
+    const oldImageUrl = undefined;
     const whatEventAreYouEditing = null;
     const events = [
       {
@@ -152,6 +158,7 @@ class App extends Component {
       }
     ];
     this.setState({ areYouAddingAnEvent });
+    this.setState({ oldImageUrl });
     this.setState({ whatEventAreYouEditing });
     this.setState({ events });
   };
@@ -179,16 +186,23 @@ class App extends Component {
     const sortDirection = "byKey";
     this.setState({ sortDirection });
   };
-  //Not working in firefox
+
   handleReadCookie = () => {
     const eventsString = document.cookie;
     const events = JSON.parse(eventsString);
+    console.log(eventsString);
     this.setState({ events });
   };
 
   handleWriteCookie = () => {
     const events = [...this.state.events];
     const list = JSON.stringify(events);
+    console.log(list);
+    document.cookie.split(";").forEach(function(c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
     document.cookie = list;
   };
 
@@ -243,6 +257,8 @@ class App extends Component {
 
       whatEventAreYouEditing = null;
       this.setState({ whatEventAreYouEditing });
+      const oldImageUrl = undefined;
+      this.setState({ oldImageUrl });
     }
     events[0] = {
       eventName: "",
@@ -351,6 +367,7 @@ class App extends Component {
             areYouAddingAnEvent={this.state.areYouAddingAnEvent}
             events={this.displayedEvents(this.state.events)}
             time={this.state.time}
+            oldImageUrl={this.state.oldImageUrl}
             onDelete={this.handleDelete}
             onEdit={this.handleEdit}
             onEventDate={this.handleEventDate}

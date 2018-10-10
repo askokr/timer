@@ -22,10 +22,7 @@ class Editor extends Component {
 
     return (
       <div className="container editor-container text-center m-4">
-        <div
-          className="editor-background"
-          style={{ height: "350px", overflow: "hidden" }}
-        >
+        <div className="editor-background" style={{ height: "400px" }}>
           <Form
             eventDate={eventDate}
             eventName={eventName}

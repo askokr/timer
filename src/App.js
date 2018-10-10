@@ -53,7 +53,6 @@ class App extends Component {
   componentDidMount() {
     setInterval(this.update, 1000);
     this.updateYears();
-    console.log("did mount");
   }
 
   //Automatically calculate next year for events
@@ -180,21 +179,16 @@ class App extends Component {
     const sortDirection = "byKey";
     this.setState({ sortDirection });
   };
-
+  //Not working in firefox
   handleReadCookie = () => {
     const eventsString = document.cookie;
     const events = JSON.parse(eventsString);
-
-    console.log(eventsString);
-    console.log(events);
     this.setState({ events });
   };
 
   handleWriteCookie = () => {
     const events = [...this.state.events];
     const list = JSON.stringify(events);
-    console.log(events);
-    console.log(list);
     document.cookie = list;
   };
 
@@ -239,7 +233,6 @@ class App extends Component {
       const areYouAddingAnEvent = false;
       this.setState({ areYouAddingAnEvent });
     } else {
-      console.log("this hapens"); //this deos, in fact, not hapen :-/
       let whatEventAreYouEditing = this.state.whatEventAreYouEditing;
       var indexOfEvent = events.findIndex(
         i => i.eventId === whatEventAreYouEditing
@@ -286,6 +279,21 @@ class App extends Component {
     let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
     whatEvetsToDisplay = "upcoming";
     this.setState({ whatEvetsToDisplay });
+  };
+
+  handleRandomImage = async e => {
+    e.preventDefault();
+    console.log("random image call");
+    const ACCESS_KEY =
+      "b97cc352335ea33a72e964d4c985c386b54ac45abbb031bbb23ba1c2bca3b116";
+    const api_call = await fetch(
+      `https://api.unsplash.com/photos/random/?client_id=${ACCESS_KEY}&orientation=landscape`
+    );
+    const response = await api_call.json();
+    const imageUrl = response.urls.regular;
+    let events = [...this.state.events];
+    events[0].imageUrl = imageUrl;
+    this.setState(events);
   };
 
   displayedEvents = () => {
@@ -349,6 +357,7 @@ class App extends Component {
             onEventName={this.handleEventName}
             onFormSubmit={this.handleFormSubmit}
             onImageUrl={this.handleImageUrl}
+            onRandomImage={this.handleRandomImage}
             onToggleEditor={this.handleToggleEditor}
             onToggleEventEditor={this.handleToggleEventEditor}
             whatEventAreYouEditing={this.state.whatEventAreYouEditing}

@@ -6,14 +6,15 @@ import "./stylesheets/react-datetime.css";
 
 class Editor extends Component {
   render() {
-    const { eventName, eventDate, imageUrl } = this.props.editableEvent;
+    const { eventDate, eventName, imageUrl } = this.props.editableEvent;
     const {
-      onFormSubmit,
-      onEventName,
       onEventDate,
+      onEventName,
+      onFormSubmit,
       onImageUrl,
       onToggleEditor,
       onToggleEventEditor,
+      onRandomImage,
       whatEventAreYouEditing
     } = this.props;
     return (
@@ -23,13 +24,14 @@ class Editor extends Component {
           style={{ height: "350px", overflow: "hidden" }}
         >
           <Form
-            eventName={eventName}
             eventDate={eventDate}
+            eventName={eventName}
             imageUrl={imageUrl}
-            onFormSubmit={onFormSubmit}
-            onEventName={onEventName}
             onEventDate={onEventDate}
+            onEventName={onEventName}
+            onFormSubmit={onFormSubmit}
             onImageUrl={onImageUrl}
+            onRandomImage={onRandomImage}
           />
 
           <div className="d-flex flex-row justify-content-around">
@@ -53,9 +55,9 @@ class Editor extends Component {
               </div>
               <div>
                 <CloseButton
-                  whatEventAreYouEditing={whatEventAreYouEditing}
                   onToggleEditor={onToggleEditor}
                   onToggleEventEditor={onToggleEventEditor}
+                  whatEventAreYouEditing={whatEventAreYouEditing}
                 />
               </div>
             </div>

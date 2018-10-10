@@ -16,6 +16,7 @@ class AddEvent extends Component {
             onImageUrl={this.props.onImageUrl}
             onFormSubmit={this.props.onFormSubmit}
             onToggleEditor={this.props.onToggleEditor}
+            onRandomImage={this.props.onRandomImage}
             whatEventAreYouEditing={this.props.whatEventAreYouEditing}
           />
         ) : (

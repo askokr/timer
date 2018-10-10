@@ -4,18 +4,19 @@ import AddEvent from "./addevent";
 import Editor from "./editor";
 
 const TimerList = ({
-  events,
-  time,
-  onDelete,
-  onEdit,
-  whatEventAreYouEditing,
-  onToggleEventEditor,
-  onToggleEditor,
   areYouAddingAnEvent,
-  onFormSubmit,
-  onEventName,
+  events,
+  onEdit,
+  onDelete,
   onEventDate,
-  onImageUrl
+  onEventName,
+  onFormSubmit,
+  onImageUrl,
+  onRandomImage,
+  onToggleEditor,
+  onToggleEventEditor,
+  time,
+  whatEventAreYouEditing
 }) => {
   const eventsToRender = events.filter(event => event.eventId !== 0);
   const editableEvent = events.find(event => event.eventId === 0);
@@ -32,6 +33,7 @@ const TimerList = ({
         onToggleEditor={onToggleEditor}
         time={time}
         whatEventAreYouEditing={whatEventAreYouEditing}
+        onRandomImage={onRandomImage}
       />
       {eventsToRender.map(event => {
         if (event.eventId !== whatEventAreYouEditing) {
@@ -54,6 +56,7 @@ const TimerList = ({
               onEventName={onEventName}
               onFormSubmit={onFormSubmit}
               onImageUrl={onImageUrl}
+              onRandomImage={onRandomImage}
               onToggleEditor={onToggleEditor}
               onToggleEventEditor={onToggleEventEditor}
               whatEventAreYouEditing={whatEventAreYouEditing}

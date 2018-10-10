@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Moment from "moment";
 import DateTime from "react-datetime";
 import Octicon from "react-octicon";
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
 
 Moment.locale("en-gb", {
   week: {
@@ -18,7 +20,8 @@ class Form extends Component {
       onFormSubmit,
       onEventName,
       onEventDate,
-      onImageUrl
+      onImageUrl,
+      onRandomImage
     } = this.props;
     return (
       <form className="container-fluid" onSubmit={onFormSubmit}>
@@ -68,12 +71,19 @@ class Form extends Component {
               onChange={onImageUrl}
             />
             <div className="input-group-append">
-              <button
-                className="btn btn-secondary"
-                // onClick={() => onDelete(eventId)}
+              <Tooltip
+                TransitionComponent={Zoom}
+                placement="bottom-end"
+                title="Get random image from Unsplash"
               >
-                <Octicon name="unverified" />
-              </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={onRandomImage}
+                >
+                  <Octicon name="unverified" />
+                </button>
+              </Tooltip>
             </div>
           </div>
         </div>

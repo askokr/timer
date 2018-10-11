@@ -1,13 +1,19 @@
 import React, { Component } from "react";
-import timerFunction from "./functions/timerfunction";
-import datetimeStringFunction from "./functions/datetimeStringFunction";
 import Buttons from "./TimerDisplayElements/buttons";
+import TextBox from "./TimerDisplayElements/textBox";
 import "../App.css";
 
 class TimerDisplay extends Component {
   render() {
     const props = this.props;
-    const { event, favouriteEvent, onDelete, onEdit, onFavourite } = props;
+    const {
+      event,
+      favouriteEvent,
+      onDelete,
+      onEdit,
+      onFavourite,
+      time
+    } = props;
     const { eventName, eventDate, eventId, imageUrl } = event;
     const backgroundImage = {
       backgroundImage: `url(${imageUrl})`
@@ -18,21 +24,16 @@ class TimerDisplay extends Component {
         <div
           className={
             "text-container" +
-            (new Date(this.props.time) > new Date(eventDate)
-              ? " passedEvent"
-              : "")
+            (new Date(time) > new Date(eventDate) ? " passedEvent" : "")
           }
         >
           <div className="d-flex flex-row">
             <div className="p-2 w-100">
-              <h2>{eventName === "" ? "Unnamed event" : eventName}</h2>
-              <h4>
-                {Object.prototype.toString.call(eventDate) ===
-                  "[object Date]" || eventDate === ""
-                  ? "On an undefined date"
-                  : datetimeStringFunction(eventDate)}
-              </h4>
-              <h3>{timerFunction(props)}</h3>
+              <TextBox
+                eventName={eventName}
+                eventDate={eventDate}
+                timerFunctionInput={props}
+              />
             </div>
             <div className="p-2">
               <Buttons

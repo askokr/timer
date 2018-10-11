@@ -107,12 +107,12 @@ class App extends Component {
     const currentDate = this.state.time.getDate();
     let christmasYear;
     let stJohnsYear;
-    if (currentMonth <= christmasMonth && currentDate < christmasDate) {
+    if (currentMonth <= christmasMonth && currentDate <= christmasDate) {
       christmasYear = this.state.time.getFullYear();
     } else {
       christmasYear = this.state.time.getFullYear() + 1;
     }
-    if (currentMonth <= stJohnsMonth && currentDate < stJohnsDate) {
+    if (currentMonth <= stJohnsMonth && currentDate <= stJohnsDate) {
       stJohnsYear = this.state.time.getFullYear();
     } else {
       stJohnsYear = this.state.time.getFullYear() + 1;

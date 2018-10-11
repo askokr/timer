@@ -14,15 +14,15 @@ class ImageBox extends Component {
   };
 
   addEventView = () => {
-    const oldImage = {
-      backgroundImage: `url(${this.props.oldImageUrl})`,
+    const newImage = {
+      backgroundImage: `url(${this.props.newImageUrl})`,
       width: "400px",
       height: "95px"
     };
     return (
       <div className="p-2 bd-highlight">
         <span className="text-above-image">Image preview</span>
-        <div style={oldImage} className="background-image shadowy" />
+        <div style={newImage} className="background-image shadowy" />
       </div>
     );
   };

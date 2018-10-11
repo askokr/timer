@@ -3,7 +3,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
 
 class DeleteAllButtonGroup extends Component {
-  state = {};
   render() {
     const { onDelete } = this.props;
     return (

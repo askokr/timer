@@ -140,29 +140,43 @@ class App extends Component {
 
   handleDelete = eventId => {
     const favouriteEvent = null;
-    if (eventId === "all") {
-      const areYouAddingAnEvent = false;
-      const oldImageUrl = undefined;
-      const whatEventAreYouEditing = null;
-      const events = [
-        {
-          eventName: "",
-          eventDate: "",
-          imageUrl: "",
-          eventId: 0
-        }
-      ];
-      this.setState({ areYouAddingAnEvent });
-      this.setState({ favouriteEvent });
-      this.setState({ oldImageUrl });
-      this.setState({ whatEventAreYouEditing });
-      this.setState({ events });
-    } else {
-      const events = this.state.events.filter(c => c.eventId !== eventId);
-      if (eventId === this.state.favouriteEvent) {
+    let events;
+    switch (eventId) {
+      case "all":
+        const areYouAddingAnEvent = false;
+        const oldImageUrl = undefined;
+        const whatEventAreYouEditing = null;
+        events = [
+          {
+            eventName: "",
+            eventDate: "",
+            imageUrl: "",
+            eventId: 0
+          }
+        ];
+        this.setState({ areYouAddingAnEvent });
         this.setState({ favouriteEvent });
-      }
-      this.setState({ events });
+        this.setState({ oldImageUrl });
+        this.setState({ whatEventAreYouEditing });
+        this.setState({ events });
+        break;
+      case "cookie":
+        document.cookie.split(";").forEach(function(c) {
+          document.cookie = c
+            .replace(/^ +/, "")
+            .replace(
+              /=.*/,
+              "=;expires=" + new Date().toUTCString() + ";path=/"
+            );
+        });
+        document.cookie = "";
+        break;
+      default:
+        events = this.state.events.filter(c => c.eventId !== eventId);
+        if (eventId === this.state.favouriteEvent) {
+          this.setState({ favouriteEvent });
+        }
+        this.setState({ events });
     }
   };
 
@@ -264,7 +278,6 @@ class App extends Component {
 
   handleRandomImage = async e => {
     e.preventDefault();
-    console.log("random image call");
     const ACCESS_KEY =
       "b97cc352335ea33a72e964d4c985c386b54ac45abbb031bbb23ba1c2bca3b116";
     const api_call = await fetch(
@@ -348,12 +361,7 @@ class App extends Component {
     console.log(favouriteEvent);
     console.log(events);
 
-    //clear ole cookie data
-    document.cookie.split(";").forEach(function(c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
+    this.handleDelete("cookie");
     document.cookie = cookieContent;
   };
 

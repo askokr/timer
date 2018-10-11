@@ -22,6 +22,7 @@ const NavBar = ({
         {/* <h1 className="text-white m-4">Events</h1> */}
 
         <SaveLoadButtonGruop
+          onDelete={onDelete}
           onReadCookie={onReadCookie}
           onWriteCookie={onWriteCookie}
           isThereACookie={isThereACookie}

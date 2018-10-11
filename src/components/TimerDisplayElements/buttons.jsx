@@ -41,7 +41,11 @@ class Buttons extends Component {
         <Tooltip
           TransitionComponent={Zoom}
           placement="left"
-          title="Set as favourite"
+          title={
+            eventId === favouriteEvent
+              ? "Current favourite"
+              : "Set as favourite"
+          }
         >
           <button
             className="btn btn-link btn-lg"

@@ -76,7 +76,7 @@
   /* transform: scale(1.03); */
   opacity: 0.5;
   border: 1px solid black;
-  box-shadow: 2px 2px 2px 2px black;
+  box-shadow: 6px 6px 6px 6px black;
 }
 
 .zoom:hover h2,
@@ -166,3 +166,8 @@
   font-style: oblique;
   font-weight: 500;
 }
+/* 
+.btn-outline-primary:hover {
+  background-color: #0069d9 !important;
+  border-color: #0062cc !important;
+} */

@@ -5,12 +5,7 @@ import Octicon from "react-octicon";
 
 class SortOrderButtonGroup extends Component {
   render() {
-    const {
-      onSortAscending,
-      onSortByKey,
-      onSortDescending,
-      sortDirection
-    } = this.props;
+    const { onSort, sortDirection } = this.props;
     return (
       <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
         <Tooltip TransitionComponent={Zoom} title="Sort in ascending order">
@@ -20,7 +15,7 @@ class SortOrderButtonGroup extends Component {
               (sortDirection === "ascending" ? "" : "outline-") +
               "primary"
             }
-            onClick={onSortAscending}
+            onClick={() => onSort("ascending")}
           >
             🡅
           </button>
@@ -32,7 +27,7 @@ class SortOrderButtonGroup extends Component {
               (sortDirection === "byKey" ? "" : "outline-") +
               "primary"
             }
-            onClick={onSortByKey}
+            onClick={() => onSort("byKey")}
           >
             <Octicon name="pencil" />
           </button>
@@ -44,7 +39,7 @@ class SortOrderButtonGroup extends Component {
               (sortDirection === "descending" ? "" : "outline-") +
               "primary"
             }
-            onClick={onSortDescending}
+            onClick={() => onSort("descending")}
           >
             🡇
           </button>

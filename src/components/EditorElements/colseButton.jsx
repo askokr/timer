@@ -8,11 +8,7 @@ class CloseButton extends Component {
   }
 
   closeButton = () => {
-    const {
-      whatEventAreYouEditing,
-      onToggleEditor,
-      onToggleEventEditor
-    } = this.props;
+    const { whatEventAreYouEditing, onToggle } = this.props;
     if (whatEventAreYouEditing === null) {
       return (
         <Tooltip
@@ -21,7 +17,7 @@ class CloseButton extends Component {
           title="Cancel adding new event, clear all field"
         >
           <button
-            onClick={onToggleEditor}
+            onClick={() => onToggle("editor")}
             className="btn btn-danger m-4 btn-lg"
           >
             Close
@@ -36,7 +32,7 @@ class CloseButton extends Component {
           title="Cancel editing this event, keep all old values"
         >
           <button
-            onClick={onToggleEventEditor}
+            onClick={() => onToggle("event")}
             className="btn btn-danger m-4 btn-lg"
           >
             Close editor

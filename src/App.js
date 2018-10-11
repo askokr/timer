@@ -8,9 +8,10 @@ import "bootstrap/dist/css/bootstrap.css";
 class App extends Component {
   state = {
     areYouAddingAnEvent: false,
+    favouriteEvent: null,
     oldImageUrl: undefined,
-    time: new Date(),
     sortDirection: "byKey",
+    time: new Date(),
     whatEventAreYouEditing: null,
     whatEvetsToDisplay: "all",
     events: [
@@ -41,7 +42,7 @@ class App extends Component {
         eventId: 3
       },
       {
-        eventName: " End of ValiIT! theory course",
+        eventName: "End of ValiIT! theory course",
         eventDate: "September 24, 2018 17:00",
         imageUrl:
           "https://cdn-images-1.medium.com/max/2000/1*9Cqyu3Lx4BKHUZShGe5cuQ.jpeg",
@@ -55,6 +56,46 @@ class App extends Component {
     setInterval(this.update, 1000);
     this.updateYears();
   }
+
+  update = () => {
+    this.setState({
+      time: new Date()
+    });
+    this.rememberSortorder();
+  };
+  //Sort images to be displayed
+  displayedEvents = () => {
+    let usnortedEvents = [...this.state.events];
+    const currentTime = this.state.time;
+    const theZeroeth = usnortedEvents.shift();
+    const favouriteEventId = this.state.favouriteEvent;
+    let events = usnortedEvents;
+    let favouriteEvent, sortedEvents;
+
+    if (favouriteEventId !== null) {
+      favouriteEvent = usnortedEvents.find(e => e.eventId === favouriteEventId);
+      events = usnortedEvents.filter(e => e.eventId !== favouriteEventId);
+    }
+    switch (this.state.whatEvetsToDisplay) {
+      case "upcoming":
+        sortedEvents = events.filter(
+          e => new Date(e.eventDate) > new Date(currentTime)
+        );
+        break;
+      case "passed":
+        sortedEvents = events.filter(
+          e => new Date(e.eventDate) < new Date(currentTime)
+        );
+        break;
+      default:
+        sortedEvents = events;
+    }
+    if (favouriteEventId !== null) {
+      sortedEvents.unshift(favouriteEvent);
+    }
+    sortedEvents.unshift(theZeroeth);
+    return sortedEvents;
+  };
 
   //Automatically calculate next year for events
   updateYears = () => {
@@ -84,35 +125,50 @@ class App extends Component {
     this.setState({ events });
   };
 
-  update = () => {
-    this.setState({
-      time: new Date()
-    });
-    this.rememberSortorder();
-  };
-
   rememberSortorder = () => {
     switch (this.state.sortDirection) {
       case "descending":
-        this.handleSortDescending();
+        this.handleSort("descending");
         break;
       case "ascending":
-        this.handleSortAscending();
+        this.handleSort("ascending");
         break;
       default:
-        this.handleSortByKey();
+        this.handleSort("byKey");
     }
   };
 
-  clearForm = () => {
-    let events = [...this.state.events];
-    events[0] = {
-      eventName: "",
-      eventDate: "",
-      imageUrl: "",
-      eventId: 0
-    };
-    this.setState({ events });
+  handleDelete = eventId => {
+    const favouriteEvent = null;
+    if (eventId === "all") {
+      const areYouAddingAnEvent = false;
+      const oldImageUrl = undefined;
+      const whatEventAreYouEditing = null;
+      const events = [
+        {
+          eventName: "",
+          eventDate: "",
+          imageUrl: "",
+          eventId: 0
+        }
+      ];
+      this.setState({ areYouAddingAnEvent });
+      this.setState({ favouriteEvent });
+      this.setState({ oldImageUrl });
+      this.setState({ whatEventAreYouEditing });
+      this.setState({ events });
+    } else {
+      const events = this.state.events.filter(c => c.eventId !== eventId);
+      if (eventId === this.state.favouriteEvent) {
+        this.setState({ favouriteEvent });
+      }
+      this.setState({ events });
+    }
+  };
+
+  handleDisplay = type => {
+    const whatEvetsToDisplay = type;
+    this.setState({ whatEvetsToDisplay });
   };
 
   handleEdit = eventId => {
@@ -133,77 +189,11 @@ class App extends Component {
     events[0].imageUrl = event.imageUrl;
   };
 
-  handleToggleEventEditor = () => {
-    const whatEventAreYouEditing = null;
-    const oldImageUrl = undefined;
-    this.setState({ whatEventAreYouEditing });
-    this.setState({ oldImageUrl });
-  };
-
-  handleDelete = eventId => {
-    const events = this.state.events.filter(c => c.eventId !== eventId);
-    this.setState({ events });
-  };
-
-  handleDeleteAll = () => {
-    const areYouAddingAnEvent = false;
-    const oldImageUrl = undefined;
-    const whatEventAreYouEditing = null;
-    const events = [
-      {
-        eventName: "",
-        eventDate: "",
-        imageUrl: "",
-        eventId: 0
-      }
-    ];
-    this.setState({ areYouAddingAnEvent });
-    this.setState({ oldImageUrl });
-    this.setState({ whatEventAreYouEditing });
-    this.setState({ events });
-  };
-
-  handleSortAscending = () => {
+  handleEventDate = e => {
+    const value = e.valueOf();
     const events = [...this.state.events];
-    events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+    events[0].eventDate = value;
     this.setState({ events });
-    const sortDirection = "ascending";
-    this.setState({ sortDirection });
-  };
-
-  handleSortDescending = () => {
-    const events = [...this.state.events];
-    events.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
-    this.setState({ events });
-    const sortDirection = "descending";
-    this.setState({ sortDirection });
-  };
-
-  handleSortByKey = () => {
-    const events = [...this.state.events];
-    events.sort((a, b) => a.eventId - b.eventId);
-    this.setState({ events });
-    const sortDirection = "byKey";
-    this.setState({ sortDirection });
-  };
-
-  handleReadCookie = () => {
-    const eventsString = document.cookie;
-    const events = JSON.parse(eventsString);
-    console.log(eventsString);
-    this.setState({ events });
-  };
-
-  handleWriteCookie = () => {
-    const events = [...this.state.events];
-    const list = JSON.stringify(events);
-    console.log(list);
-    document.cookie.split(";").forEach(function(c) {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    });
-    document.cookie = list;
   };
 
   handleEventName = e => {
@@ -213,18 +203,14 @@ class App extends Component {
     this.setState({ events });
   };
 
-  handleEventDate = e => {
-    const value = e.valueOf();
-    const events = [...this.state.events];
-    events[0].eventDate = value;
-    this.setState({ events });
-  };
-
-  handleImageUrl = e => {
-    const value = e.target.value;
-    const events = [...this.state.events];
-    events[0].imageUrl = value;
-    this.setState({ events });
+  handleOnFavourite = eventId => {
+    let favouriteEvent;
+    if (eventId !== this.state.favouriteEvent) {
+      favouriteEvent = eventId;
+    } else {
+      favouriteEvent = null;
+    }
+    this.setState({ favouriteEvent });
   };
 
   handleFormSubmit = e => {
@@ -235,7 +221,7 @@ class App extends Component {
     let events = [...this.state.events];
 
     if (this.state.areYouAddingAnEvent === true) {
-      const newEventId = this.state.time;
+      const newEventId = this.state.time.getTime();
       const newEvent = {
         eventName: newEventName,
         eventDate: newEventDate,
@@ -269,32 +255,11 @@ class App extends Component {
     this.setState({ events });
   };
 
-  handleToggleEditor = () => {
-    this.clearForm();
-    if (this.state.whatEventAreYouEditing !== null) {
-      this.handleToggleEventEditor();
-    }
-    this.setState(prevState => ({
-      areYouAddingAnEvent: !prevState.areYouAddingAnEvent
-    }));
-  };
-
-  handleDisplayAll = () => {
-    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
-    whatEvetsToDisplay = "all";
-    this.setState({ whatEvetsToDisplay });
-  };
-
-  handleDisplayPassed = () => {
-    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
-    whatEvetsToDisplay = "passed";
-    this.setState({ whatEvetsToDisplay });
-  };
-
-  handleDisplayUpcoming = () => {
-    let whatEvetsToDisplay = [...this.state.whatEvetsToDisplay];
-    whatEvetsToDisplay = "upcoming";
-    this.setState({ whatEvetsToDisplay });
+  handleImageUrl = e => {
+    const value = e.target.value;
+    const events = [...this.state.events];
+    events[0].imageUrl = value;
+    this.setState({ events });
   };
 
   handleRandomImage = async e => {
@@ -307,32 +272,89 @@ class App extends Component {
     );
     const response = await api_call.json();
     const imageUrl = response.urls.regular;
+    const userProfile = response.user.links.html;
+    console.log(userProfile);
     let events = [...this.state.events];
     events[0].imageUrl = imageUrl;
     this.setState(events);
   };
 
-  displayedEvents = () => {
-    let events = [...this.state.events];
-    const currentTime = this.state.time;
-    const theZeroeth = events.shift();
-    let sortedEvents;
-    switch (this.state.whatEvetsToDisplay) {
-      case "upcoming":
-        sortedEvents = events.filter(
-          e => new Date(e.eventDate) > new Date(currentTime)
-        );
+  handleReadCookie = () => {
+    const cookieContent = document.cookie;
+    const combinedString = JSON.parse(cookieContent);
+    const favouriteEvent = combinedString[0][0];
+    const eventsString = combinedString[1];
+    const events = JSON.parse(eventsString);
+
+    // console.log(favouriteEvent);
+    // console.log(events);
+
+    this.setState({ favouriteEvent });
+    this.setState({ events });
+  };
+
+  handleSort = type => {
+    const events = [...this.state.events];
+    let sortDirection;
+    switch (type) {
+      case "ascending":
+        events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
         break;
-      case "passed":
-        sortedEvents = events.filter(
-          e => new Date(e.eventDate) < new Date(currentTime)
-        );
+      case "descending":
+        events.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
         break;
       default:
-        sortedEvents = events;
+        events.sort((a, b) => a.eventId - b.eventId);
+        break;
     }
-    sortedEvents.unshift(theZeroeth);
-    return sortedEvents;
+
+    this.setState({ events });
+    sortDirection = type;
+    this.setState({ sortDirection });
+  };
+
+  handleToggle = what => {
+    if (what === "editor") {
+      let events = [...this.state.events];
+      events[0] = {
+        eventName: "",
+        eventDate: "",
+        imageUrl: "",
+        eventId: 0
+      };
+      this.setState({ events });
+      if (this.state.whatEventAreYouEditing !== null) {
+        this.handleToggle("event");
+      }
+      this.setState(prevState => ({
+        areYouAddingAnEvent: !prevState.areYouAddingAnEvent
+      }));
+    } else {
+      const whatEventAreYouEditing = null;
+      const oldImageUrl = undefined;
+      this.setState({ whatEventAreYouEditing });
+      this.setState({ oldImageUrl });
+    }
+  };
+
+  handleWriteCookie = () => {
+    const events = [...this.state.events];
+    const eventsString = JSON.stringify(events);
+
+    const favouriteEvent = [this.state.favouriteEvent];
+    const combinedString = [favouriteEvent, eventsString];
+    const cookieContent = JSON.stringify(combinedString);
+
+    console.log(favouriteEvent);
+    console.log(events);
+
+    //clear ole cookie data
+    document.cookie.split(";").forEach(function(c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    document.cookie = cookieContent;
   };
 
   render() {
@@ -340,14 +362,10 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar
-          onDeleteAll={this.handleDeleteAll}
-          onDisplayAll={this.handleDisplayAll}
-          onDisplayPassed={this.handleDisplayPassed}
-          onDisplayUpcoming={this.handleDisplayUpcoming}
+          onDelete={this.handleDelete}
+          onDisplay={this.handleDisplay}
           onReadCookie={this.handleReadCookie}
-          onSortAscending={this.handleSortAscending}
-          onSortByKey={this.handleSortByKey}
-          onSortDescending={this.handleSortDescending}
+          onSort={this.handleSort}
           onWriteCookie={this.handleWriteCookie}
           sortDirection={this.state.sortDirection}
           time={this.state.time}
@@ -366,17 +384,18 @@ class App extends Component {
           <TimerList
             areYouAddingAnEvent={this.state.areYouAddingAnEvent}
             events={this.displayedEvents(this.state.events)}
+            favouriteEvent={this.state.favouriteEvent}
             time={this.state.time}
             oldImageUrl={this.state.oldImageUrl}
             onDelete={this.handleDelete}
             onEdit={this.handleEdit}
             onEventDate={this.handleEventDate}
             onEventName={this.handleEventName}
+            onFavourite={this.handleOnFavourite}
             onFormSubmit={this.handleFormSubmit}
             onImageUrl={this.handleImageUrl}
             onRandomImage={this.handleRandomImage}
-            onToggleEditor={this.handleToggleEditor}
-            onToggleEventEditor={this.handleToggleEventEditor}
+            onToggle={this.handleToggle}
             whatEventAreYouEditing={this.state.whatEventAreYouEditing}
           />
         </main>

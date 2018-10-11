@@ -6,14 +6,10 @@ import ElementsToDisplayButtonGroup from "./NavBarElements/elementsToDisplayButt
 import DeleteAllButtonGroup from "./NavBarElements/deleteAllButtonGroup";
 
 const NavBar = ({
-  onDeleteAll,
-  onDisplayAll,
-  onDisplayPassed,
-  onDisplayUpcoming,
+  onDelete,
+  onDisplay,
   onReadCookie,
-  onSortAscending,
-  onSortByKey,
-  onSortDescending,
+  onSort,
   onWriteCookie,
   sortDirection,
   time,
@@ -31,19 +27,12 @@ const NavBar = ({
           isThereACookie={isThereACookie}
         />
 
-        <DeleteAllButtonGroup onDeleteAll={onDeleteAll} />
+        <DeleteAllButtonGroup onDelete={onDelete} />
 
-        <SortOrderButtonGroup
-          onSortAscending={onSortAscending}
-          onSortByKey={onSortByKey}
-          onSortDescending={onSortDescending}
-          sortDirection={sortDirection}
-        />
+        <SortOrderButtonGroup onSort={onSort} sortDirection={sortDirection} />
 
         <ElementsToDisplayButtonGroup
-          onDisplayAll={onDisplayAll}
-          onDisplayPassed={onDisplayPassed}
-          onDisplayUpcoming={onDisplayUpcoming}
+          onDisplay={onDisplay}
           whatEvetsToDisplay={whatEvetsToDisplay}
         />
       </div>

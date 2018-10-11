@@ -5,12 +5,12 @@ import Zoom from "@material-ui/core/Zoom";
 class DeleteAllButtonGroup extends Component {
   state = {};
   render() {
-    const { onDeleteAll } = this.props;
+    const { onDelete } = this.props;
     return (
       <Tooltip TransitionComponent={Zoom} title="Delete all events">
         <button
           className="btn btn-outline-danger btn-lg m-2"
-          onClick={onDeleteAll}
+          onClick={() => onDelete("all")}
         >
           Clear all events
         </button>

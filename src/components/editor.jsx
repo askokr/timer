@@ -14,8 +14,7 @@ class Editor extends Component {
       onEventName,
       onFormSubmit,
       onImageUrl,
-      onToggleEditor,
-      onToggleEventEditor,
+      onToggle,
       onRandomImage,
       whatEventAreYouEditing
     } = this.props;
@@ -52,8 +51,7 @@ class Editor extends Component {
               </div>
               <div>
                 <CloseButton
-                  onToggleEditor={onToggleEditor}
-                  onToggleEventEditor={onToggleEventEditor}
+                  onToggle={onToggle}
                   whatEventAreYouEditing={whatEventAreYouEditing}
                 />
               </div>

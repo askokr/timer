@@ -16,7 +16,7 @@ class AddEvent extends Component {
             onEventName={this.props.onEventName}
             onImageUrl={this.props.onImageUrl}
             onFormSubmit={this.props.onFormSubmit}
-            onToggleEditor={this.props.onToggleEditor}
+            onToggle={this.props.onToggle}
             onRandomImage={this.props.onRandomImage}
             whatEventAreYouEditing={this.props.whatEventAreYouEditing}
           />
@@ -37,7 +37,7 @@ class AddEvent extends Component {
         >
           <button
             className="container text-cente btn btn-warning shadowy"
-            onClick={this.props.onToggleEditor}
+            onClick={() => this.props.onToggle("editor")}
           >
             <h2>Add Event</h2>
           </button>

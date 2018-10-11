@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import timerFunction from "./functions/timerfunction";
 import datetimeStringFunction from "./functions/datetimeStringFunction";
-import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
-import Octicon from "react-octicon";
+import Buttons from "./TimerDisplayElements/buttons";
 import "../App.css";
 
 class TimerDisplay extends Component {
   render() {
     const props = this.props;
-    const { event, onDelete, onEdit } = props;
+    const { event, favouriteEvent, onDelete, onEdit, onFavourite } = props;
     const { eventName, eventDate, eventId, imageUrl } = event;
     const backgroundImage = {
       backgroundImage: `url(${imageUrl})`
@@ -36,33 +34,14 @@ class TimerDisplay extends Component {
               </h4>
               <h3>{timerFunction(props)}</h3>
             </div>
-            <div className="p-2 flex-shrink-1">
-              <div className="text-container-button">
-                <Tooltip
-                  TransitionComponent={Zoom}
-                  placement="left"
-                  title="Delete this event"
-                >
-                  <button
-                    className="btn btn-danger btn-lg"
-                    onClick={() => onDelete(eventId)}
-                  >
-                    <Octicon name="trashcan" mega />
-                  </button>
-                </Tooltip>
-                <Tooltip
-                  TransitionComponent={Zoom}
-                  placement="left"
-                  title="Edit this event"
-                >
-                  <button
-                    className="btn btn-success btn-lg"
-                    onClick={() => onEdit(eventId)}
-                  >
-                    <Octicon name="tools" mega />
-                  </button>
-                </Tooltip>
-              </div>
+            <div className="p-2">
+              <Buttons
+                eventId={eventId}
+                favouriteEvent={favouriteEvent}
+                onDelete={onDelete}
+                onEdit={onEdit}
+                onFavourite={onFavourite}
+              />
             </div>
           </div>
         </div>

@@ -4,12 +4,7 @@ import Zoom from "@material-ui/core/Zoom";
 
 class ElementsToDisplayButtonGroup extends Component {
   render() {
-    const {
-      onDisplayAll,
-      onDisplayPassed,
-      onDisplayUpcoming,
-      whatEvetsToDisplay
-    } = this.props;
+    const { onDisplay, whatEvetsToDisplay } = this.props;
     return (
       <div className="btn-group btn-group-toggle m-2" data-toggle="buttons">
         <Tooltip TransitionComponent={Zoom} title="Display passed events only">
@@ -19,7 +14,7 @@ class ElementsToDisplayButtonGroup extends Component {
               (whatEvetsToDisplay === "passed" ? "" : "outline-") +
               "primary"
             }
-            onClick={onDisplayPassed}
+            onClick={() => onDisplay("passed")}
           >
             🡄
           </button>
@@ -31,7 +26,7 @@ class ElementsToDisplayButtonGroup extends Component {
               (whatEvetsToDisplay === "all" ? "" : "outline-") +
               "primary"
             }
-            onClick={onDisplayAll}
+            onClick={() => onDisplay("all")}
           >
             🡀🡂
           </button>
@@ -46,7 +41,7 @@ class ElementsToDisplayButtonGroup extends Component {
               (whatEvetsToDisplay === "upcoming" ? "" : "outline-") +
               "primary"
             }
-            onClick={onDisplayUpcoming}
+            onClick={() => onDisplay("upcoming")}
           >
             🡆
           </button>

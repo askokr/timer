@@ -6,16 +6,17 @@ import Editor from "./editor";
 const TimerList = ({
   areYouAddingAnEvent,
   events,
+  favouriteEvent,
   oldImageUrl,
-  onEdit,
   onDelete,
+  onEdit,
   onEventDate,
   onEventName,
+  onFavourite,
   onFormSubmit,
   onImageUrl,
   onRandomImage,
-  onToggleEditor,
-  onToggleEventEditor,
+  onToggle,
   time,
   whatEventAreYouEditing
 }) => {
@@ -32,7 +33,7 @@ const TimerList = ({
         onEventName={onEventName}
         onImageUrl={onImageUrl}
         onFormSubmit={onFormSubmit}
-        onToggleEditor={onToggleEditor}
+        onToggle={onToggle}
         time={time}
         whatEventAreYouEditing={whatEventAreYouEditing}
         onRandomImage={onRandomImage}
@@ -42,9 +43,11 @@ const TimerList = ({
           return (
             <TimerDisplay
               event={event}
+              favouriteEvent={favouriteEvent}
               time={time}
               onDelete={onDelete}
               onEdit={onEdit}
+              onFavourite={onFavourite}
               key={event.eventId}
             />
           );
@@ -60,8 +63,7 @@ const TimerList = ({
               onFormSubmit={onFormSubmit}
               onImageUrl={onImageUrl}
               onRandomImage={onRandomImage}
-              onToggleEditor={onToggleEditor}
-              onToggleEventEditor={onToggleEventEditor}
+              onToggle={onToggle}
               whatEventAreYouEditing={whatEventAreYouEditing}
             />
           );

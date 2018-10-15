@@ -38,7 +38,7 @@ class Buttons extends Component {
             <Octicon name="tools" mega />
           </button>
         </Tooltip>
-        <Tooltip
+        {/* <Tooltip
           TransitionComponent={Zoom}
           placement="left"
           title={
@@ -56,7 +56,7 @@ class Buttons extends Component {
           >
             <Octicon name="heart" mega />
           </button>
-        </Tooltip>
+        </Tooltip> */}
       </div>
     );
   }

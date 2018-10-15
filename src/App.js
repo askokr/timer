@@ -322,8 +322,6 @@ class App extends Component {
         break;
     }
 
-    const whatEventAreYouEditing = null;
-    this.setState({ whatEventAreYouEditing });
     this.setState({ events });
     sortDirection = type;
     this.setState({ sortDirection });

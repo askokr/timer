@@ -20,8 +20,8 @@ const TimerList = ({
   time,
   whatEventAreYouEditing
 }) => {
-  const eventsToRender = events.filter(event => event.eventId !== 0);
-  const editableEvent = events.find(event => event.eventId === 0);
+  const editableEvent = events[0];
+  const eventsToRender = events.slice(1);
 
   return (
     <React.Fragment>

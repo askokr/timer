@@ -69,12 +69,13 @@ class App extends Component {
     const currentTime = this.state.time;
     const theZeroeth = usnortedEvents.shift();
     const favouriteEventId = this.state.favouriteEvent;
-    let events = usnortedEvents;
-    let favouriteEvent, sortedEvents;
+    let events, favouriteEvent, sortedEvents;
 
     if (favouriteEventId !== null) {
       favouriteEvent = usnortedEvents.find(e => e.eventId === favouriteEventId);
       events = usnortedEvents.filter(e => e.eventId !== favouriteEventId);
+    } else {
+      events = usnortedEvents;
     }
     switch (this.state.whatEvetsToDisplay) {
       case "upcoming":

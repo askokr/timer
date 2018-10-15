@@ -17,7 +17,7 @@ class SortOrderButtonGroup extends Component {
             }
             onClick={() => onSort("ascending")}
           >
-            🡅
+            <Octicon name="chevron-up" />
           </button>
         </Tooltip>
         <Tooltip TransitionComponent={Zoom} title="Sort by order of addition">
@@ -41,7 +41,7 @@ class SortOrderButtonGroup extends Component {
             }
             onClick={() => onSort("descending")}
           >
-            🡇
+            <Octicon name="chevron-down" />
           </button>
         </Tooltip>
       </div>

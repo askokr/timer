@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import Zoom from "@material-ui/core/Zoom";
+import Octicon from "react-octicon";
 
 class ElementsToDisplayButtonGroup extends Component {
   render() {
@@ -16,7 +17,7 @@ class ElementsToDisplayButtonGroup extends Component {
             }
             onClick={() => onDisplay("passed")}
           >
-            🡄
+            <Octicon name="chevron-left" />
           </button>
         </Tooltip>
         <Tooltip TransitionComponent={Zoom} title="Display all events">
@@ -28,7 +29,7 @@ class ElementsToDisplayButtonGroup extends Component {
             }
             onClick={() => onDisplay("all")}
           >
-            🡀🡂
+            <Octicon name="code" />
           </button>
         </Tooltip>
         <Tooltip
@@ -43,7 +44,7 @@ class ElementsToDisplayButtonGroup extends Component {
             }
             onClick={() => onDisplay("upcoming")}
           >
-            🡆
+            <Octicon name="chevron-right" />
           </button>
         </Tooltip>
       </div>

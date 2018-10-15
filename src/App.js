@@ -248,15 +248,15 @@ class App extends Component {
       const areYouAddingAnEvent = false;
       this.setState({ areYouAddingAnEvent });
     } else {
-      let whatEventAreYouEditing = this.state.whatEventAreYouEditing;
+      const oldWhatEventAreYouEditing = this.state.whatEventAreYouEditing;
       var indexOfEvent = events.findIndex(
-        i => i.eventId === whatEventAreYouEditing
+        i => i.eventId === oldWhatEventAreYouEditing
       );
       events[indexOfEvent].eventName = newEventName;
       events[indexOfEvent].eventDate = newEventDate;
       events[indexOfEvent].imageUrl = newImageUrl;
 
-      whatEventAreYouEditing = null;
+      const whatEventAreYouEditing = null;
       this.setState({ whatEventAreYouEditing });
       const oldImageUrl = undefined;
       this.setState({ oldImageUrl });
@@ -322,6 +322,8 @@ class App extends Component {
         break;
     }
 
+    const whatEventAreYouEditing = null;
+    this.setState({ whatEventAreYouEditing });
     this.setState({ events });
     sortDirection = type;
     this.setState({ sortDirection });

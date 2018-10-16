@@ -57,19 +57,34 @@ class App extends Component {
     this.updateYears();
   }
 
+  componentWillUpdate(prevProps, prevState) {
+    let shouldDisplayedElementsBeRecalculated;
+    if (
+      prevState.sortDirection !== this.state.sortDirection ||
+      prevState.favouriteEvent !== this.state.favouriteEvent ||
+      prevState.whatEvetsToDisplay !== this.state.whatEvetsToDisplay
+    ) {
+      shouldDisplayedElementsBeRecalculated = true;
+      console.log("updated state");
+    }
+  }
+
   update = () => {
     this.setState({
       time: new Date()
     });
     this.rememberSortorder();
+    console.log("recalculate sorted events");
   };
+
   //Sort images to be displayed
   displayedEvents = () => {
     let usnortedEvents = [...this.state.events];
+    let events, favouriteEvent, sortedEvents;
+    console.log("recalculate displayed events");
     const currentTime = this.state.time;
     const theZeroeth = usnortedEvents.shift();
     const favouriteEventId = this.state.favouriteEvent;
-    let events, favouriteEvent, sortedEvents;
 
     if (favouriteEventId !== null) {
       favouriteEvent = usnortedEvents.find(e => e.eventId === favouriteEventId);
@@ -308,20 +323,38 @@ class App extends Component {
   };
 
   handleSort = type => {
-    const events = [...this.state.events];
-    let sortDirection;
+    let usnortedEvents = [...this.state.events];
+    const theZeroeth = usnortedEvents.shift();
+    const favouriteEventId = this.state.favouriteEvent;
+    let events, favouriteEvent, sortedEvents, sortDirection;
+
+    if (favouriteEventId !== null) {
+      favouriteEvent = usnortedEvents.find(e => e.eventId === favouriteEventId);
+      events = usnortedEvents.filter(e => e.eventId !== favouriteEventId);
+    } else {
+      events = usnortedEvents;
+    }
     switch (type) {
       case "ascending":
-        events.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+        usnortedEvents.sort(
+          (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
+        );
         break;
       case "descending":
-        events.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
+        usnortedEvents.sort(
+          (a, b) => new Date(a.eventDate) - new Date(b.eventDate)
+        );
         break;
       default:
-        events.sort((a, b) => a.eventId - b.eventId);
+        usnortedEvents.sort((a, b) => a.eventId - b.eventId);
         break;
     }
-
+    sortedEvents = usnortedEvents;
+    if (favouriteEventId !== null) {
+      sortedEvents.unshift(favouriteEvent);
+    }
+    sortedEvents.unshift(theZeroeth);
+    events = sortedEvents;
     this.setState({ events });
     sortDirection = type;
     this.setState({ sortDirection });

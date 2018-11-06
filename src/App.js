@@ -57,15 +57,14 @@ class App extends Component {
     this.updateYears();
   }
 
-  componentWillUpdate(prevProps, prevState) {
-    let shouldDisplayedElementsBeRecalculated;
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate");
     if (
       prevState.sortDirection !== this.state.sortDirection ||
       prevState.favouriteEvent !== this.state.favouriteEvent ||
       prevState.whatEvetsToDisplay !== this.state.whatEvetsToDisplay
     ) {
-      shouldDisplayedElementsBeRecalculated = true;
-      console.log("updated state");
+      console.log("changed state");
     }
   }
 
